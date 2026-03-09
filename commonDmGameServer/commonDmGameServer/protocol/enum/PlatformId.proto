@@ -1,0 +1,33 @@
+syntax="proto3";
+package pb;
+option go_package = "./;pb";
+//message PlatformId {
+//// Tiktok
+// PlatformId Tiktok=1;
+//// 视频号
+// PlatformId ShiPinHao=2;
+//// 快手
+// PlatformId KuaiShou=3;
+//// B站
+// PlatformId BZhan=4;
+//// 抖音
+// PlatformId DouYin=5;
+//// QQ
+// PlatformId QQ=6;
+//}
+enum PlatformId {
+ PlatformIdNone=0;
+Tiktok=1;
+ShiPinHao=2;
+KuaiShou=3;
+BZhan=4;
+DouYin=5;
+QQ=6;
+ MM=7;//陌陌
+ Hy=8;//虎牙
+ Lrs=9;//狼人杀
+ //Dyhh
+ TkHh=15;// tk自己的盒子平台
+ DyHh=16;// dy自己的盒子平台
+}
+ 

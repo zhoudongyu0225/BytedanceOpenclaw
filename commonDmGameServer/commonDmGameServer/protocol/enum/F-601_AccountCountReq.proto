@@ -1,0 +1,38 @@
+syntax="proto3";
+package pb;
+option go_package = "./;pb";
+//直播账号统计请求
+message AccountCountReq {
+ // 数据前缀
+ AccountCountDataFixVo dataFixVo=1;
+ // 管理员密码
+ string adminPassword=2;
+ // 查询时间 (当日凌晨时间戳秒)
+ int64 viewTime=3;
+ // 查询下标,从0开始
+ int32 startIndex=4;
+ // 查询下标,从0开始
+ int32 endIndex=5;
+ // 排序 1每日 2总
+ int32 sortType=6;
+ // 主播id
+ string accountId =7;
+ // 公告
+ string notice =8;
+ int32  page =9;
+ int32  limit =10;
+ int32  MsgCode = 11;//消息code 0成功 1失败
+
+}
+message AccountCountDataFixVo {
+ // 游戏ID
+ int32 gameId=1;
+ // 平台
+ int32 platformId=2;
+ // 地区
+ int32 regionId=3;
+ // 游戏模式/官游/野游
+ int32 modeId=4;
+ // 区服
+ int32 partition=5;
+}

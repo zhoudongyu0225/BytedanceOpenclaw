@@ -1,0 +1,10 @@
+syntax = "proto3";
+package pb;
+option go_package = "./;pb";
+	// 心跳
+message PongResp{
+ string  errMsg = 1;//消息code 0成功 1失败
+ // 服务端当前时间
+ int64 serverTime=2;
+
+}

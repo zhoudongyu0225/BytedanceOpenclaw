@@ -1,0 +1,8 @@
+syntax = "proto3";
+package pb;
+option go_package = "./;pb";
+import "Z0_Common.proto";
+	// 观众加入
+message PlayerJoinNotify{
+  repeated OpenVo openList = 1;
+}

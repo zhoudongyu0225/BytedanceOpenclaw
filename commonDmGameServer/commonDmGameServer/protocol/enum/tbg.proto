@@ -1,0 +1,25 @@
+syntax = "proto3";
+package pb;
+option go_package = "./;pb";
+
+// 副本类型
+enum CaveType {
+  CAT_None = 0;//普通副本 读chapter的配置
+  // 大闹天宫
+  CAT_DaNaotianGong = 1; //读大闹天宫的配置  其他的同理
+  // 神兽试炼
+  CAT_ShenShouShiLian = 2;
+  // 通天塔
+  CAT_TongTianTa = 3;
+  // 试炼塔
+  CAT_ShiLianTa = 4;
+  // 世界boss
+  CAT_ShiJieBoss = 5;
+  //最强战队
+  CAT_ZuiQiangZhanDui = 6;
+  //   三皇争锋
+  CAT_SanHuangZhengFeng = 7;
+  //  五帝争锋
+  CAT_WuDiZhengFeng = 8;
+
+}

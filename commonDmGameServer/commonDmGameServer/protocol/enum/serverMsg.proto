@@ -1,0 +1,29 @@
+syntax = "proto3";
+package pb;
+option go_package = "./;pb";
+//观众加入房间请求
+message MessageList {
+ string  type = 1;
+ repeated Message msgList = 2;
+ string  AccountId = 3;   // 账号Id
+ string RoomId = 4;   // 房间号
+}
+message Message {
+ string  type = 1;
+ string  name = 2;
+ string uid = 3;
+ string head_img = 4;
+ string  content = 5;
+ string  count = 6;       // 点赞数量
+ string total = 7;    // 礼物总价值
+ string giftId = 8;     // 礼物id
+ string giftCount = 9;  // 礼物数量
+ string  giftName = 10;
+ string repeatEnd = 11;
+ string  msgId = 12;
+ string  anchorId =13;//主播id
+
+ string groupId = 14;
+ bool repeatEndhh = 15;
+}
+

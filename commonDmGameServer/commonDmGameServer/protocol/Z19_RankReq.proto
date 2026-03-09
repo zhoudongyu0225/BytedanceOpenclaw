@@ -1,0 +1,9 @@
+syntax = "proto3";
+package pb;
+option go_package = "./;pb";
+import "Z0_Common.proto";
+// 查看排行榜请求
+message RankReq{
+  RankType RankType = 1;
+
+}

@@ -1,0 +1,20 @@
+syntax = "proto3";
+package pb;
+option go_package = "./;pb";
+	// 客户端登录请求
+message LoginReq{
+  // 游戏ID
+  int32 gameId=1;
+  // 平台
+  int32 platformId=2;
+  // 游戏模式/官游/野游
+  int32 modeId=3;
+  // 账号 (野游和本次测试才传入)
+  string accountId=4;
+  // 版本
+  string version=5;
+  // 直播间绑定码 (官游才传入发房间id)
+  string roomId=6;
+  // token (抖音传入)
+  string token=7;
+}

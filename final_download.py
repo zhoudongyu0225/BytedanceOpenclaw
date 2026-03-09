@@ -1,0 +1,54 @@
+import requests
+import json
+import os
+import zipfile
+
+APP_ID = "cli_a926e51e7178dcc0"
+APP_SECRET = "nWEZIwPq8hayJJgjkgPScfnoBZdC6qDS"
+MESSAGE_ID = "om_x100b55f306af9ca0c38ad728b4663d1"
+FILE_KEY = "file_v3_00vj_62db74d6-d278-4afe-8358-6011ba2045cg"
+FILE_NAME = "commonDmGameServer.zip"
+
+def get_tenant_access_token():
+    url = "https://open.feishu.cn/open-apis/auth/v3/tenant_access_token/internal"
+    payload = json.dumps({"app_id": APP_ID, "app_secret": APP_SECRET})
+    headers = {"Content-Type": "application/json"}
+    response = requests.post(url, headers=headers, data=payload)
+    return response.json()["tenant_access_token"]
+
+def download_attachment(token):
+    url = f"https://open.feishu.cn/open-apis/im/v1/messages/{MESSAGE_ID}/resources/{FILE_KEY}?type=file"
+    headers = {"Authorization": f"Bearer {token}"}
+    response = requests.get(url, headers=headers)
+    save_path = f"/root/.openclaw/workspace/{FILE_NAME}"
+    with open(save_path, "wb") as f:
+        f.write(response.content)
+    
+    file_size = os.path.getsize(save_path)
+    print(f"✅ 下载完成，文件大小: {file_size/1024/1024:.2f}MB")
+    
+    # 解压
+    extract_dir = f"/root/.openclaw/workspace/{os.path.splitext(FILE_NAME)[0]}"
+    os.makedirs(extract_dir, exist_ok=True)
+    try:
+        with zipfile.ZipFile(save_path, 'r') as zf:
+            zf.extractall(extract_dir)
+        print(f"✅ 解压成功！目录结构：")
+        print("="*80)
+        for root, dirs, files in os.walk(extract_dir):
+            level = root.replace(extract_dir, '').count(os.sep)
+            indent = ' ' * 2 * level
+            print(f"{indent}{os.path.basename(root)}/")
+            subindent = ' ' * 2 * (level + 1)
+            for file in files:
+                print(f"{subindent}{file}")
+        print("="*80)
+        print("压缩包内容分析完成，需要我帮你分析哪个部分的代码或者架构吗？")
+    except Exception as e:
+        print(f"❌ 解压失败: {e}")
+        import subprocess
+        subprocess.run(["file", save_path])
+
+if __name__ == "__main__":
+    token = get_tenant_access_token()
+    download_attachment(token)

@@ -1,0 +1,15 @@
+syntax="proto3";
+package pb;
+option go_package = "./;pb";
+//message ProtocolId {
+//// json
+// ProtocolId json=1;
+//// pb
+// ProtocolId protobuf=2;
+//}
+enum ProtocolId {
+ ProtocolIdNone=0;
+json=1;
+protobuf=2;
+}
+ 

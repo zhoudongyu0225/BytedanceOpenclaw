@@ -1,0 +1,13 @@
+syntax="proto3";
+package pb;
+option go_package = "./;pb";
+
+// 烽火帝国
+//GameId Fhdg=6;
+//}
+enum GameId {
+ GameIdnone=0;
+game1=1;
+
+}
+ 

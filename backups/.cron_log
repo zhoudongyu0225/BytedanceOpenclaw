@@ -1,0 +1,16 @@
+[plugins] plugins.allow is empty; discovered non-bundled plugins may auto-load: ai-assistant-security-openclaw (/root/.openclaw/extensions/ai-assistant-security-openclaw/bundle.js), dingtalk-connector (/root/.openclaw/extensions/dingtalk-connector/plugin.ts), qqbot (/root/.openclaw/extensions/qqbot/index.ts), wecom (/root/.openclaw/extensions/wecom/dist/index.js). Set plugins.allow to explicit trusted ids.
+error: unknown command 'run'
+(Did you mean cron?)
+[plugins] plugins.allow is empty; discovered non-bundled plugins may auto-load: ai-assistant-security-openclaw (/root/.openclaw/extensions/ai-assistant-security-openclaw/bundle.js), dingtalk-connector (/root/.openclaw/extensions/dingtalk-connector/plugin.ts), qqbot (/root/.openclaw/extensions/qqbot/index.ts), wecom (/root/.openclaw/extensions/wecom/dist/index.js). Set plugins.allow to explicit trusted ids.
+[plugins] [@omni-shield/ai-assistant-security-openclaw 1.0.0] State directory: /root/.openclaw
+[plugins] [@omni-shield/ai-assistant-security-openclaw 1.0.0] Verifying configuration with moderate interface: https://openclaw.sdk.access.llm-shield.omini-shield.com...
+[plugins] [DingTalk] 插件已注册（支持主动发送 AI Card 消息）
+[plugins] feishu_doc: Registered feishu_doc, feishu_app_scopes
+[plugins] feishu_wiki: Registered feishu_wiki tool
+[plugins] feishu_drive: Registered feishu_drive tool
+[plugins] feishu_bitable: Registered bitable tools
+[info]: [ 'client ready' ]
+[plugins] [@omni-shield/ai-assistant-security-openclaw 1.0.0] Plugin successfully initialized and registered hook points (fetch:true, beforeToolCall:true, afterToolCall:true).
+✅ Sent via Feishu. Message ID: om_x100b55fb0a605094b35cb68988f2242 (chat ou_78cc320f0b8cf38abf3f9433655b72da)
+2026-03-08 进化报告已发送
+2026-03-09 无会话记录，跳过生成报告

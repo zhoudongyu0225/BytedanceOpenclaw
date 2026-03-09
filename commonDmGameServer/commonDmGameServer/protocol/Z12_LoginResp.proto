@@ -1,0 +1,16 @@
+syntax = "proto3";
+package pb;
+option go_package = "./;pb";
+import "Z0_Common.proto";
+// 客户端登录回复
+message LoginResp{
+  string  errMsg = 1;//消息code 0成功 1失败
+  // 房间号
+  string roomId = 2;
+  // 时间戳(秒)
+  int32 serverTime = 3;
+  // 主播数据
+  AnchorDBInfo anchorDB = 4;
+  // 战斗是否未结算
+  bool isBattleUnsettle=5;// true 是没有结算 false 是已经结算或没有开始
+}

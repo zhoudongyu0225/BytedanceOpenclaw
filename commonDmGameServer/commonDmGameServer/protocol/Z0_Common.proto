@@ -1,0 +1,90 @@
+syntax = "proto3";
+package pb;
+option go_package = "./;pb";
+
+
+message Common{
+
+}
+
+enum RankType{
+  PlayerRankWeek = 0;// 玩家周排名
+  PlayerRankMonth = 1;// 玩家月排名
+  // 玩家段位排名
+  PlayerRanking = 2;
+}
+
+
+enum ErrCode{
+  Success = 0;//成功
+  // 通用请求错误
+  CommonFail = 1;//失败
+}
+
+
+// 玩家数据
+message OpenVo {
+  // openId
+  string openId = 1;
+  // 用户头像
+  string avatarUrl = 2;
+  // 昵称
+  string nickName = 3;
+  // 总礼物值
+  int64 giftValue = 4;
+  // 这周积分
+  int64 score = 5;
+  // 当周排名
+  int32 rank = 6;
+  // 这胜点
+  int64 winPoint = 7;
+  // 这月积分
+  int64 monthScore = 8;
+  // 当月排名
+  int32 monthRank = 9;
+  // 上次更新时间
+  int64 lastUpdateTime = 12;
+}
+
+//主播信息存档的
+message AnchorDBInfo {
+  // 唯一id
+  string accountId = 1;
+  // 昵称
+  string nickName = 2;
+  // 头像
+  string headUrl = 3;
+  // 游戏ID
+  int32 gameId = 4;
+  // 平台
+  int32 platformId = 5;
+  // 游戏模式(官游/野游)
+  int32 modeId = 6;
+  // 总礼物值
+  double allGiftValue = 7;
+}
+message OpenBaseVo {
+  // openId
+  string openId = 1;
+  // 用户头像
+  string avatarUrl = 2;
+  // 昵称
+  string nickName = 3;
+  // 评论
+  string content = 4;
+}
+
+
+// 玩家继承的下一场的数据
+message PlayerInheritInfo{
+  // 玩家id
+  string openId = 1;
+  // 礼物id
+  string giftId = 2;
+  // 礼物数量
+  int32 giftNum = 3;
+  // 名字
+  string name = 4;
+  // 头像
+  string headUrl = 5;
+}

@@ -1,0 +1,27 @@
+syntax="proto3";
+package pb;
+option go_package = "./;pb";
+//message RegionId {
+//// 中东
+// RegionId ZhongDong=1;
+//// 国内台湾
+// RegionId CN_TaiWan=2;
+//// 英美
+// RegionId YingMei=3;
+//// 日本
+// RegionId RiBen=4;
+//// 韩国
+// RegionId HanGuo=5;
+//// 中国大陆
+// RegionId CN=6;
+//}
+enum RegionId {
+ RegionIdNone=0;
+ZhongDong=1;
+CN_TaiWan=2;
+YingMei=3;
+RiBen=4;
+HanGuo=5;
+CN=6;
+}
+ 

@@ -1,0 +1,15 @@
+syntax="proto3";
+package pb;
+option go_package = "./;pb";
+//message ModeId {
+//// 官游
+// ModeId GuanYou=1;
+//// 野游
+// ModeId YeYou=2;
+//}
+enum ModeId {
+ ModeIdNone=0;
+GuanYou=1;
+YeYou=2;
+}
+ 

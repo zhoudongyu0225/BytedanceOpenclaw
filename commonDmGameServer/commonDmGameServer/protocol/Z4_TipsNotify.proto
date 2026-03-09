@@ -1,0 +1,16 @@
+syntax = "proto3";
+package pb;
+option go_package = "./;pb";
+	// 提示(一般错误)
+message TipsNotify{
+  // 错误信息
+  string tipMsg = 1;
+  TipType type = 2;// 0普通 1公告 2本直播间滚条 3.本直播间的跑马灯  4.全服的跑马灯
+}
+enum TipType{
+  Normal = 0;
+  Notice = 1; // 公告
+  RoomRoll = 2; //2直播间滚条
+  RoomMarquee = 3;//直播间的跑马灯
+  ServerMarquee = 4;// 全服的跑马灯
+}

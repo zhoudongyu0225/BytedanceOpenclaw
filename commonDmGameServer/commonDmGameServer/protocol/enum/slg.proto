@@ -1,0 +1,15 @@
+syntax = "proto3";
+package pb;
+option go_package = "./;pb";
+
+// 农民枚举
+enum FarmerType {
+  // 挖矿
+  Farmer_Mine = 0;
+  // 步兵士
+  Farmer_Infantry = 1;
+  // 弓箭手
+  Farmer_Archer = 2;
+  // 骑兵士
+  Farmer_Cavalry = 3;
+}

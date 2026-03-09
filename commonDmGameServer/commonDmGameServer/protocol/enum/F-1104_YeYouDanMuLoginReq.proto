@@ -1,0 +1,10 @@
+syntax="proto3";
+package pb;
+option go_package = "./;pb";
+//野游弹幕登录请求
+message YeYouDanMuLoginReq {  
+// 账号
+ string account=1;
+// 直播间地址
+ string roomId=2;
+}

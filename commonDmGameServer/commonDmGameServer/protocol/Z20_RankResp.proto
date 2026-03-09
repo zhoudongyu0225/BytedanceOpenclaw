@@ -1,0 +1,21 @@
+syntax = "proto3";
+package pb;
+option go_package = "./;pb";
+import "Z0_Common.proto";
+// 查看排行榜回复
+message RankResp{
+ string  errMsg = 1;//消息code 0成功 1失败
+ RankType RankType = 2;
+ repeated RanInfo RanInfoList =3;
+}
+
+message RanInfo{
+ // 名字
+ string name = 1;
+ // 头像
+ string headUrl = 2;
+ // 分
+ int64 score = 3;
+ // 胜点
+  int64 winPoint = 4;
+}

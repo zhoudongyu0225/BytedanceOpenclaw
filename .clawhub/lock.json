@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "skills": {
+    "proactive-agent": {
+      "version": "3.1.0",
+      "installedAt": 1772946667892
+    },
+    "multi-search-engine": {
+      "version": "2.0.1",
+      "installedAt": 1772946671814
+    },
+    "browser-use": {
+      "version": "1.0.2",
+      "installedAt": 1772946728960
+    }
+  }
+}

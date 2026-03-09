@@ -1,0 +1,66 @@
+syntax = "proto3";
+
+
+// 消息类型
+enum MessageType{
+  MT_INVALID       = 0;  // 默认无效
+  PS_CHAT          = 1;  // 评论
+  PS_LIKE          = 2;  // 点赞
+  PS_GIFT          = 3;  // 礼物
+}
+
+// 主播登录请求
+message WsLogin {
+  string telephone = 1; //手机号
+  string password = 2; // 密码
+}
+
+
+// 玩家游戏信息
+message PlayerGameInfo{
+  string gameUid = 1; // 玩家游戏的uid
+  uint32 score = 2; // 玩家游戏分数
+  int32  winRepeatedlyCnt = 3; // 连胜次数
+}
+
+// 玩家信息
+message PlayerInfo {
+  string uid = 1; //玩家uid
+  string name = 2; // 玩家名字
+  string head_img = 3; // 玩家头像
+  repeated PlayerGameInfo playerGameInfoList = 4; // 玩家游戏信息
+}
+
+// (66ms汇总发一次)当前的弹幕消息
+message AllPlayerBarrage {
+ map<string,PlayerBarrage> playerBarrageMap = 1;// 玩家弹幕信息 key:玩家uid
+}
+
+
+// 玩家弹幕信息
+message PlayerBarrage {
+  string uid = 1;// 玩家uid
+  PlayerBarrageBase playerBarrageBase = 2;// 玩家弹幕信息基础(只会在第一次的时候发送)
+  repeated PlayerBarrageDynamics playerBarrageDynamicsList = 3;// 玩家弹幕信息动态(先后顺序)
+}
+
+// 玩家弹幕信息基础(只会在第一次的时候发送,后续都不会再发了)
+message PlayerBarrageBase {
+  string name = 1; // 玩家昵称
+  string head_img = 2;// 玩家头像
+}
+
+// 玩家弹幕信息动态
+message PlayerBarrageDynamics {
+  MessageType messageType = 1;// 消息类型
+  string  content  = 2;//弹幕
+  int32   giftId   = 3;//礼物id
+  int32   giftCount= 4;//礼物数量
+  int32   repeatEnd= 5;//是否连发
+  int32   count    = 6;//连发次数
+  int32   total    = 7;//连发总次数
+  string  giftName = 8;//礼物名称
+  uint32  seq = 9;     //消息序列号（每次收到+1 对 2^32-1取模）
+}
+
+

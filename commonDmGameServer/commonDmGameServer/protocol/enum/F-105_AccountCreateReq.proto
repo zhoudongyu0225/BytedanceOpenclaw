@@ -1,0 +1,24 @@
+syntax="proto3";
+package pb;
+option go_package = "./;pb";
+//创建账号请求
+message AccountCreateReq {  
+// 新账号
+ string accountId=1;
+// 昵称(默认为账号)
+ string nickName=2;
+// 账号所属公会
+ string accountBelong=3;
+// 游戏ID
+ int32 gameId=4;
+// 平台
+ int32 platformId=5;
+// 游戏模式(官游/野游)
+ int32 modeId=6;
+// 预充值额度(RMB)
+ double money=9;
+// 流水比例
+ double moneyRate=10;
+// 管理员密码
+ string adminPassword=11;
+}

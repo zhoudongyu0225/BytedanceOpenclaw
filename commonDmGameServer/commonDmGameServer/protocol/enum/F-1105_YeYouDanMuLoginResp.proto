@@ -1,0 +1,11 @@
+syntax="proto3";
+package pb;
+option go_package = "./;pb";
+//野游弹幕登录响应
+message YeYouDanMuLoginResp {  
+// 账号过期时间
+ int64 expiredTime=1;
+// 令牌
+ string token=2;
+ int32  MsgCode = 3;//消息code 0成功 1失败
+}
