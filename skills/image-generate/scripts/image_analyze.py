@@ -3,7 +3,7 @@ import sys
 import base64
 from volcenginesdkarkruntime import Ark
 
-DEFAULT_VISION_MODEL = "doubao-1.5-vision-241028"
+DEFAULT_VISION_MODEL = "ep-20260310152101-7r8tp"
 
 def analyze_image(image_path: str):
     """分析图片内容，提取详细特征
