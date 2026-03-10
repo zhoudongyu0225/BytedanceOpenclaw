@@ -50,12 +50,36 @@ def image_to_image(prompt: str, image_path: str, strength: float = 0.7):
         if not os.path.exists(download_dir):
             os.makedirs(download_dir, exist_ok=True)
 
+        from PIL import Image
         for i, image in enumerate(result["data"]):
             timestamp = int(time.time())
             filename = f"generated_image_ref_{timestamp}_{i}.png"
             filepath = os.path.join(download_dir, filename)
             urllib.request.urlretrieve(image["url"], filepath)
-            print(f"基于参考图生成成功：{filepath}")
+            
+            # 自动裁剪成竖版9:16比例
+            try:
+                img = Image.open(filepath)
+                width, height = img.size
+                target_ratio = 9 / 16
+                if width / height > target_ratio:
+                    # 太宽，裁剪左右
+                    new_width = int(height * target_ratio)
+                    left = (width - new_width) // 2
+                    right = left + new_width
+                    img = img.crop((left, 0, right, height))
+                else:
+                    # 太高，裁剪上下
+                    new_height = int(width / target_ratio)
+                    top = (height - new_height) // 2
+                    bottom = top + new_height
+                    img = img.crop((0, top, width, bottom))
+                # 保存裁剪后的图
+                cropped_path = filepath.replace(".png", "_vertical.png")
+                img.save(cropped_path)
+                print(f"基于参考图生成成功：{cropped_path}（已自动裁剪为9:16竖版）")
+            except Exception as e:
+                print(f"裁剪成功：{filepath}（裁剪失败，返回原图）")
     except Exception as e:
         print(f"图生图失败：{e}，响应内容：{response.text if 'response' in locals() else ''}")
 
