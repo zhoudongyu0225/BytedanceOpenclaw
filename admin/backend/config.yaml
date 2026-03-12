@@ -1,0 +1,20 @@
+server:
+  port: 8080
+  mode: debug
+
+jwt:
+  secret: "dinosaur-game-admin-2026-secret-key"
+  expire: 24 # 小时
+
+mongodb:
+  uri: "mongodb://localhost:27017"
+  database: "dinosaur_game"
+
+redis:
+  addr: "localhost:6379"
+  password: ""
+  db: 0
+
+log:
+  level: info
+  path: "./logs"
