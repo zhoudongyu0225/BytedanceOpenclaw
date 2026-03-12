@@ -34,7 +34,15 @@ func InitRouter() *gin.Engine {
 		adminGroup := authV1.Group("")
 		adminGroup.Use(middleware.RoleAuth(model.RoleSuperAdmin))
 		{
-			// 后续添加用户管理、主播管理等接口
+			// 主播管理接口
+			anchorGroup := adminGroup.Group("/anchor")
+			{
+				anchorGroup.GET("/list", controller.GetAnchorList)
+				anchorGroup.POST("/create", controller.CreateAnchor)
+				anchorGroup.POST("/update", controller.UpdateAnchor)
+				anchorGroup.DELETE("/delete/:id", controller.DeleteAnchor)
+				anchorGroup.POST("/batch-update-status", controller.BatchUpdateAnchorStatus)
+			}
 		}
 	}
 
@@ -44,6 +52,15 @@ func InitRouter() *gin.Engine {
 			"code": 200,
 			"msg":  "ok",
 		})
+	})
+
+	// 文档静态服务
+	r.StaticFS("/docs", http.Dir("./static/docs"))
+	// 静态资源服务
+	r.Static("/assets", "./static/assets")
+	// 前端页面路由
+	r.NoRoute(func(c *gin.Context) {
+		c.File("./static/index.html")
 	})
 
 	return r
