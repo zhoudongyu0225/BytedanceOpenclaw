@@ -43,6 +43,44 @@ func InitRouter() *gin.Engine {
 				anchorGroup.DELETE("/delete/:id", controller.DeleteAnchor)
 				anchorGroup.POST("/batch-update-status", controller.BatchUpdateAnchorStatus)
 			}
+
+			// 礼物管理接口
+			giftGroup := adminGroup.Group("/gift")
+			{
+				giftGroup.GET("/list", controller.GetGiftList)
+				giftGroup.POST("/send", controller.SendGift)
+				giftGroup.GET("/records", controller.GetGiftRecords)
+			}
+
+			// 粉丝管理接口
+			fanGroup := adminGroup.Group("/fan")
+			{
+				fanGroup.GET("/list", controller.GetFanList)
+				fanGroup.POST("/update-status", controller.UpdateFanStatus)
+			}
+
+			// 公告管理接口
+			announcementGroup := adminGroup.Group("/announcement")
+			{
+				announcementGroup.GET("/list", controller.GetAnnouncementList)
+				announcementGroup.POST("/create", controller.CreateAnnouncement)
+				announcementGroup.POST("/update", controller.UpdateAnnouncement)
+				announcementGroup.DELETE("/delete/:id", controller.DeleteAnnouncement)
+			}
+
+			// GM命令接口
+			gmGroup := adminGroup.Group("/gm")
+			{
+				gmGroup.POST("/execute", controller.ExecuteGMCommand)
+				gmGroup.GET("/history", controller.GetGMHistory)
+			}
+
+			// 系统配置接口
+			configGroup := adminGroup.Group("/config")
+			{
+				configGroup.GET("/list", controller.GetSystemConfig)
+				configGroup.POST("/update", controller.UpdateSystemConfig)
+			}
 		}
 	}
 

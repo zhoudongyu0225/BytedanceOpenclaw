@@ -1,5 +1,5 @@
 <template>
-  <div class="dashboard">
+  <div class="dashboard" :class="{ 'dark': isDark }">
     <el-row :gutter="20">
       <el-col :span="6">
         <div class="stat-card">
@@ -84,13 +84,24 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import { User, Coin, Money, UserFilled, Present, Promotion, Bell, Setting } from '@element-plus/icons-vue'
+
+const isDark = ref(localStorage.getItem('theme') === 'dark')
 
 const anchorCount = ref(128)
 const todayBattleCount = ref(856)
 const todayGiftIncome = ref(125680)
 const onlineCount = ref(2341)
+
+// 监听主题变化
+onMounted(() => {
+  window.addEventListener('storage', (e) => {
+    if (e.key === 'theme') {
+      isDark.value = e.newValue === 'dark'
+    }
+  })
+})
 </script>
 
 <style scoped>
@@ -100,6 +111,10 @@ const onlineCount = ref(2341)
   box-sizing: border-box;
   background: #f5f7fa;
   transition: background 0.3s;
+}
+
+.dashboard.dark {
+  background: #141414;
 }
 
 /* 统计卡片 */
@@ -117,6 +132,11 @@ const onlineCount = ref(2341)
 .stat-card:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+}
+
+.dashboard.dark .stat-card {
+  background: #1f1f1f;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.2);
 }
 
 .stat-icon {
@@ -145,11 +165,19 @@ const onlineCount = ref(2341)
   transition: color 0.3s;
 }
 
+.dashboard.dark .stat-label {
+  color: #666;
+}
+
 .stat-value {
   font-size: 24px;
   font-weight: 600;
   color: #303133;
   transition: color 0.3s;
+}
+
+.dashboard.dark .stat-value {
+  color: #e5e5e5;
 }
 
 /* 快捷入口 */
@@ -161,12 +189,21 @@ const onlineCount = ref(2341)
   transition: background 0.3s, box-shadow 0.3s;
 }
 
+.dashboard.dark .quick-card {
+  background: #1f1f1f;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.2);
+}
+
 .card-title {
   font-size: 16px;
   font-weight: 600;
   color: #303133;
   margin-bottom: 20px;
   transition: color 0.3s;
+}
+
+.dashboard.dark .card-title {
+  color: #e5e5e5;
 }
 
 .quick-entry {
@@ -194,6 +231,15 @@ const onlineCount = ref(2341)
   color: #fff;
 }
 
+.dashboard.dark .quick-btn {
+  background: #2a2a2a;
+  color: #999;
+}
+
+.dashboard.dark .quick-btn:hover {
+  background: #409eff;
+}
+
 .quick-btn .el-icon {
   font-size: 24px;
   margin-bottom: 8px;
@@ -201,41 +247,5 @@ const onlineCount = ref(2341)
 
 .quick-btn span {
   font-size: 14px;
-}
-
-/* ===== 暗色主题 ===== */
-:global(html.dark) .dashboard {
-  background: #141414;
-}
-
-:global(html.dark) .stat-card {
-  background: #1f1f1f;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.2);
-}
-
-:global(html.dark) .stat-label {
-  color: #666;
-}
-
-:global(html.dark) .stat-value {
-  color: #e5e5e5;
-}
-
-:global(html.dark) .quick-card {
-  background: #1f1f1f;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.2);
-}
-
-:global(html.dark) .card-title {
-  color: #e5e5e5;
-}
-
-:global(html.dark) .quick-btn {
-  background: #2a2a2a;
-  color: #999;
-}
-
-:global(html.dark) .quick-btn:hover {
-  background: #409eff;
 }
 </style>

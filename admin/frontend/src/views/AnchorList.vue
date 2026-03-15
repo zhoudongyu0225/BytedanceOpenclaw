@@ -1,5 +1,5 @@
 <template>
-  <div class="anchor-list">
+  <div class="anchor-list" :class="{ 'dark': isDark }">
     <el-card class="box-card" shadow="never">
       <template #header>
         <div class="card-header">
@@ -154,6 +154,8 @@ import { ElMessage, ElMessageBox } from 'element-plus'
 import { Plus, Search } from '@element-plus/icons-vue'
 import request from '../utils/request'
 
+const isDark = ref(localStorage.getItem('theme') === 'dark')
+
 const tableData = ref([])
 const total = ref(0)
 const selectedIds = ref([])
@@ -177,6 +179,15 @@ const form = reactive({
   platform_uid: '',
   status: 1,
   remark: ''
+})
+
+// 监听主题变化
+onMounted(() => {
+  window.addEventListener('storage', (e) => {
+    if (e.key === 'theme') {
+      isDark.value = e.newValue === 'dark'
+    }
+  })
 })
 
 const getList = async () => {
@@ -289,7 +300,10 @@ onMounted(() => {
   transition: background 0.3s;
 }
 
-/* 亮色主题 */
+.anchor-list.dark {
+  background: #141414;
+}
+
 .box-card {
   height: 100%;
   display: flex;
@@ -297,6 +311,11 @@ onMounted(() => {
   background: #fff;
   border-radius: 8px;
   transition: background 0.3s, border-color 0.3s;
+}
+
+.anchor-list.dark .box-card {
+  background: #1f1f1f;
+  border-color: #333;
 }
 
 .box-card :deep(.el-card__body) {
@@ -309,6 +328,10 @@ onMounted(() => {
 .box-card :deep(.el-card__header) {
   border-bottom: 1px solid #eee;
   transition: border-color 0.3s;
+}
+
+.anchor-list.dark .box-card :deep(.el-card__header) {
+  border-bottom-color: #333;
 }
 
 .card-header {
@@ -338,6 +361,11 @@ onMounted(() => {
   transition: border-color 0.3s;
 }
 
+.anchor-list.dark .batch-bar {
+  border-top-color: #333;
+  border-bottom-color: #333;
+}
+
 /* 分页 */
 .pagination {
   height: 50px;
@@ -350,27 +378,25 @@ onMounted(() => {
   transition: border-color 0.3s;
 }
 
-/* ===== 暗色主题 ===== */
-/* 通过 :global 或者直接在父容器有 dark class 时生效 */
-:global(html.dark) .anchor-list {
-  background: #141414;
+.anchor-list.dark .pagination {
+  border-top-color: #333;
 }
 
-:global(html.dark) .box-card {
+/* 弹窗暗色主题 */
+:deep(.el-dialog) {
   background: #1f1f1f;
-  border-color: #333;
+  border: 1px solid #333;
 }
 
-:global(html.dark) .box-card :deep(.el-card__header) {
-  border-bottom-color: #333;
+:deep(.el-dialog__header) {
+  border-bottom: 1px solid #333;
 }
 
-:global(html.dark) .batch-bar {
-  border-top-color: #333;
-  border-bottom-color: #333;
+:deep(.el-dialog__title) {
+  color: #e5e5e5;
 }
 
-:global(html.dark) .pagination {
-  border-top-color: #333;
+:deep(.el-dialog__body) {
+  color: #ccc;
 }
 </style>
