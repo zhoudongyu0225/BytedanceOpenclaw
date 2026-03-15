@@ -1,18 +1,14 @@
 <template>
-  <div class="layout-container">
+  <div class="layout-container" :class="{ 'dark': isDark }">
     <el-container style="height: 100vh; width: 100vw;">
-      <!-- 左侧导航 - 游戏科技风 -->
-      <el-aside width="240px" style="background: linear-gradient(180deg, #0f0c29 0%, #302b63 50%, #24243e 100%); overflow: hidden;">
+      <!-- 左侧导航 -->
+      <el-aside width="220px" class="sidebar">
         <div class="logo-area">
-          <div class="logo-icon">🦖</div>
-          <span class="logo-text">恐龙后台</span>
+          <span class="logo-text">后台管理</span>
         </div>
         <el-menu
           :default-active="activeMenu"
           class="el-menu-vertical"
-          background-color="transparent"
-          text-color="rgba(255,255,255,0.7)"
-          active-text-color="#00d4ff"
           :router="true"
         >
           <el-menu-item v-for="item in menuItems" :key="item.path" :index="item.path">
@@ -20,36 +16,40 @@
             <span>{{ item.title }}</span>
           </el-menu-item>
         </el-menu>
-        <div class="sidebar-footer">
-          <div class="version">v1.0.0</div>
-        </div>
       </el-aside>
       
-      <el-container style="flex: 1; overflow: hidden; background: #0a0a0f;">
+      <el-container style="flex: 1; overflow: hidden;">
         <!-- 顶部栏 -->
         <el-header class="top-header">
           <div class="header-left">
             <span class="page-title">{{ pageTitle }}</span>
           </div>
           <div class="header-right">
-            <el-select v-model="currentEnv" placeholder="选择环境" size="small" class="env-select">
-              <el-option label="🧪 测试环境" value="test" />
-              <el-option label="🚀 正式环境" value="prod" />
+            <el-select v-model="currentEnv" placeholder="选择环境" size="small" style="width: 120px; margin-right: 12px;">
+              <el-option label="测试环境" value="test" />
+              <el-option label="正式环境" value="prod" />
             </el-select>
-            <el-select v-model="currentPlatform" placeholder="选择平台" size="small" class="platform-select">
-              <el-option label="🎵 抖音" :value="1" />
-              <el-option label="📱 快手" :value="2" />
-              <el-option label="🌍 TikTok" :value="3" />
+            <el-select v-model="currentPlatform" placeholder="选择平台" size="small" style="width: 120px; margin-right: 12px;">
+              <el-option label="抖音" :value="1" />
+              <el-option label="快手" :value="2" />
+              <el-option label="TikTok" :value="3" />
             </el-select>
+            <!-- 主题切换 -->
+            <el-switch
+              v-model="isDark"
+              inline-prompt
+              active-text="暗"
+              inactive-text="亮"
+              style="margin-right: 16px;"
+            />
             <el-dropdown @command="handleCommand">
               <div class="user-info">
-                <div class="avatar">管</div>
+                <el-icon><UserFilled /></el-icon>
                 <span>{{ userInfo?.nickname || userInfo?.username || '管理员' }}</span>
-                <el-icon><ArrowDown /></el-icon>
               </div>
               <template #dropdown>
                 <el-dropdown-menu>
-                  <el-dropdown-item command="logout">🚪 退出登录</el-dropdown-item>
+                  <el-dropdown-item command="logout">退出登录</el-dropdown-item>
                 </el-dropdown-menu>
               </template>
             </el-dropdown>
@@ -66,13 +66,12 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { 
   DataAnalysis, User, Present, Promotion, 
-  UserFilled, Bell, Setting, ArrowDown,
-  House, ChatLineRound, Clock, Document
+  UserFilled, Bell, Setting
 } from '@element-plus/icons-vue'
 
 const route = useRoute()
@@ -81,6 +80,21 @@ const router = useRouter()
 const userInfo = ref({})
 const currentEnv = ref('test')
 const currentPlatform = ref(1)
+const isDark = ref(false)
+
+// 监听主题变化，广播给所有组件
+watch(isDark, (val) => {
+  const theme = val ? 'dark' : 'light'
+  localStorage.setItem('theme', theme)
+  // 触发自定义事件
+  window.dispatchEvent(new CustomEvent('theme-change', { detail: val }))
+  // 同时修改 html class
+  if (val) {
+    document.documentElement.classList.add('dark')
+  } else {
+    document.documentElement.classList.remove('dark')
+  }
+})
 
 const menuItems = [
   { path: '/dashboard', title: '数据概览', icon: DataAnalysis },
@@ -108,6 +122,13 @@ const pageTitle = computed(() => {
 })
 
 onMounted(() => {
+  // 读取主题设置
+  const savedTheme = localStorage.getItem('theme')
+  if (savedTheme === 'dark') {
+    isDark.value = true
+    document.documentElement.classList.add('dark')
+  }
+  
   const info = localStorage.getItem('userInfo')
   if (info) {
     userInfo.value = JSON.parse(info)
@@ -131,10 +152,6 @@ const handleCommand = (command) => {
 </script>
 
 <style scoped>
-* {
-  box-sizing: border-box;
-}
-
 .layout-container {
   width: 100vw;
   height: 100vh;
@@ -147,91 +164,90 @@ const handleCommand = (command) => {
 }
 
 /* 侧边栏 */
-.el-aside {
-  position: relative;
-  display: flex;
-  flex-direction: column;
+.sidebar {
+  background: #fff;
+  border-right: 1px solid #e4e7ed;
+  transition: background 0.3s, border-color 0.3s;
+}
+
+.dark .sidebar {
+  background: #1f1f1f;
+  border-color: #333;
 }
 
 .logo-area {
-  height: 70px;
+  height: 60px;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
-  border-bottom: 1px solid rgba(255,255,255,0.1);
-  background: rgba(0,0,0,0.2);
-}
-
-.logo-icon {
-  font-size: 28px;
-  animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.1); }
+  background: linear-gradient(135deg, #409eff, #3375d9);
 }
 
 .logo-text {
   color: #fff;
-  font-size: 18px;
-  font-weight: 700;
-  background: linear-gradient(90deg, #00d4ff, #00ff88);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  font-size: 16px;
+  font-weight: 600;
 }
 
 .el-menu-vertical {
-  flex: 1;
   border-right: none;
-  padding: 12px 0;
+  background: #fff;
+  transition: background 0.3s;
+}
+
+.dark .el-menu-vertical {
+  background: #1f1f1f;
 }
 
 .el-menu-item {
   height: 48px;
   line-height: 48px;
-  margin: 4px 12px;
+  margin: 4px 8px;
   border-radius: 8px;
-  transition: all 0.3s ease;
+  color: #606266;
+  transition: all 0.3s;
+}
+
+.dark .el-menu-item {
+  color: #999;
 }
 
 .el-menu-item:hover {
-  background: rgba(0,212,255,0.1) !important;
+  background: #f5f7fa;
+}
+
+.dark .el-menu-item:hover {
+  background: #2a2a2a;
 }
 
 .el-menu-item.is-active {
-  background: linear-gradient(90deg, rgba(0,212,255,0.2) 0%, rgba(0,212,255,0.05) 100%) !important;
-  border-left: 3px solid #00d4ff;
+  background: #ecf5ff;
+  color: #409eff;
+}
+
+.dark .el-menu-item.is-active {
+  background: #1a3a5c;
 }
 
 .el-menu-item .el-icon {
   margin-right: 10px;
-  font-size: 18px;
-}
-
-.sidebar-footer {
-  padding: 16px;
-  text-align: center;
-  border-top: 1px solid rgba(255,255,255,0.1);
-}
-
-.version {
-  color: rgba(255,255,255,0.3);
-  font-size: 12px;
 }
 
 /* 顶部栏 */
 .top-header {
-  background: rgba(15,15,25,0.95);
-  border-bottom: 1px solid rgba(0,212,255,0.2);
+  background: #fff;
+  border-bottom: 1px solid #e4e7ed;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 24px;
   height: 60px;
-  backdrop-filter: blur(10px);
+  transition: background 0.3s, border-color 0.3s;
+}
+
+.dark .top-header {
+  background: #1f1f1f;
+  border-color: #333;
 }
 
 .header-left {
@@ -240,92 +256,54 @@ const handleCommand = (command) => {
 }
 
 .page-title {
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 600;
-  color: #fff;
+  color: #303133;
+  transition: color 0.3s;
 }
 
-.page-title::before {
-  content: '▶';
-  margin-right: 10px;
-  color: #00d4ff;
-  font-size: 12px;
+.dark .page-title {
+  color: #e5e5e5;
 }
 
 .header-right {
   display: flex;
   align-items: center;
-  gap: 16px;
-}
-
-.env-select, .platform-select {
-  width: 140px;
-}
-
-.env-select :deep(.el-input__wrapper),
-.platform-select :deep(.el-input__wrapper) {
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.1);
-  box-shadow: none;
-}
-
-.env-select :deep(.el-input__wrapper:hover),
-.platform-select :deep(.el-input__wrapper:hover) {
-  border-color: #00d4ff;
 }
 
 .user-info {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   cursor: pointer;
-  padding: 6px 12px;
-  border-radius: 20px;
-  background: rgba(255,255,255,0.05);
+  padding: 8px 12px;
+  border-radius: 6px;
+  color: #303133;
   transition: all 0.3s;
-  color: #fff;
+}
+
+.dark .user-info {
+  color: #e5e5e5;
 }
 
 .user-info:hover {
-  background: rgba(0,212,255,0.2);
+  background: #f5f7fa;
 }
 
-.avatar {
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #00d4ff, #00ff88);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 12px;
-  font-weight: bold;
+.dark .user-info:hover {
+  background: #2a2a2a;
 }
 
 /* 主内容区 */
 .main-content {
-  background: #0a0a0f;
+  background: #f5f7fa;
   padding: 0;
   overflow: hidden;
   height: calc(100vh - 60px);
+  transition: background 0.3s;
 }
 
-/* 滚动条美化 */
-::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
-}
-
-::-webkit-scrollbar-track {
-  background: rgba(255,255,255,0.05);
-}
-
-::-webkit-scrollbar-thumb {
-  background: rgba(0,212,255,0.3);
-  border-radius: 3px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(0,212,255,0.5);
+.dark .main-content {
+  background: #141414;
 }
 </style>

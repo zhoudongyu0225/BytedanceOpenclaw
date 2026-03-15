@@ -1,65 +1,59 @@
 <template>
-  <div class="login-page">
-    <div class="login-bg">
-      <div class="bg-shape shape-1"></div>
-      <div class="bg-shape shape-2"></div>
-      <div class="bg-shape shape-3"></div>
-    </div>
+  <div class="login-page" :class="{ 'dark-mode': isDark }">
     <div class="login-card">
       <div class="login-header">
-        <div class="logo">🦖</div>
-        <h1>恐龙攻守</h1>
-        <p>游戏后台管理系统</p>
+        <h1>后台管理系统</h1>
+        <p>Management System</p>
       </div>
       
       <el-form :model="form" class="login-form">
         <el-form-item>
-          <div class="input-wrapper">
-            <el-icon class="input-icon"><User /></el-icon>
-            <input 
-              v-model="form.username" 
-              type="text" 
-              placeholder="请输入用户名"
-              class="cyber-input"
-            />
-          </div>
+          <el-input 
+            v-model="form.username" 
+            placeholder="请输入用户名"
+            prefix-icon="User"
+            size="large"
+          />
         </el-form-item>
         <el-form-item>
-          <div class="input-wrapper">
-            <el-icon class="input-icon"><Lock /></el-icon>
-            <input 
-              v-model="form.password" 
-              type="password" 
-              placeholder="请输入密码"
-              class="cyber-input"
-              @keyup.enter="handleLogin"
-            />
-          </div>
+          <el-input 
+            v-model="form.password" 
+            type="password" 
+            placeholder="请输入密码"
+            prefix-icon="Lock"
+            size="large"
+            @keyup.enter="handleLogin"
+          />
         </el-form-item>
         <el-form-item>
-          <button 
-            type="button"
+          <el-button 
+            type="primary" 
+            size="large" 
             class="login-btn"
+            :loading="loading"
             @click="handleLogin"
           >
-            <span>登 录</span>
-            <div class="btn-glow"></div>
-          </button>
+            登 录
+          </el-button>
         </el-form-item>
       </el-form>
       
-      <div class="login-footer">
-        <span>© 2026 恐龙攻守游戏</span>
+      <div class="theme-toggle">
+        <el-switch
+          v-model="isDark"
+          inline-prompt
+          active-text="暗色"
+          inactive-text="亮色"
+        />
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref, reactive } from 'vue'
+import { ref, reactive, onMounted, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import { ElMessage } from 'element-plus'
-import { User, Lock } from '@element-plus/icons-vue'
 import request from '../utils/request'
 
 const router = useRouter()
@@ -69,11 +63,35 @@ const form = reactive({
   password: ''
 })
 
+const loading = ref(false)
+const isDark = ref(false)
+
+// 监听主题变化
+watch(isDark, (val) => {
+  const theme = val ? 'dark' : 'light'
+  localStorage.setItem('theme', theme)
+  if (val) {
+    document.documentElement.classList.add('dark')
+  } else {
+    document.documentElement.classList.remove('dark')
+  }
+})
+
+onMounted(() => {
+  const savedTheme = localStorage.getItem('theme')
+  if (savedTheme === 'dark') {
+    isDark.value = true
+    document.documentElement.classList.add('dark')
+  }
+})
+
 const handleLogin = async () => {
   if (!form.username || !form.password) {
     ElMessage.warning('请输入用户名和密码')
     return
   }
+  
+  loading.value = true
   try {
     const res = await request.post('/api/v1/login', {
       username: form.username,
@@ -89,6 +107,8 @@ const handleLogin = async () => {
     }
   } catch (err) {
     ElMessage.error(err.response?.data?.msg || '登录失败，请稍后重试')
+  } finally {
+    loading.value = false
   }
 }
 </script>
@@ -100,193 +120,73 @@ const handleLogin = async () => {
   display: flex;
   align-items: center;
   justify-content: center;
-  position: relative;
-  overflow: hidden;
-  background: #0a0a0f;
+  background: #f0f2f5;
+  transition: background 0.3s;
 }
 
-/* 背景动画 */
-.login-bg {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-}
-
-.bg-shape {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(80px);
-  opacity: 0.4;
-  animation: float 20s infinite;
-}
-
-.shape-1 {
-  width: 600px;
-  height: 600px;
-  background: linear-gradient(135deg, #00d4ff, #0066ff);
-  top: -200px;
-  left: -200px;
-  animation-delay: 0s;
-}
-
-.shape-2 {
-  width: 500px;
-  height: 500px;
-  background: linear-gradient(135deg, #ff00ff, #6600ff);
-  bottom: -150px;
-  right: -150px;
-  animation-delay: -7s;
-}
-
-.shape-3 {
-  width: 400px;
-  height: 400px;
-  background: linear-gradient(135deg, #00ff88, #00d4ff);
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  animation-delay: -14s;
-}
-
-@keyframes float {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  25% { transform: translate(50px, -50px) scale(1.1); }
-  50% { transform: translate(-30px, 30px) scale(0.9); }
-  75% { transform: translate(-50px, -30px) scale(1.05); }
-}
-
-/* 登录卡片 */
 .login-card {
-  width: 420px;
-  padding: 50px 40px;
-  background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(255,255,255,0.1);
-  border-radius: 20px;
-  backdrop-filter: blur(20px);
-  box-shadow: 0 25px 50px rgba(0,0,0,0.5);
-  position: relative;
-  z-index: 10;
+  width: 400px;
+  padding: 40px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  transition: background 0.3s, box-shadow 0.3s;
 }
 
 .login-header {
   text-align: center;
-  margin-bottom: 40px;
-}
-
-.logo {
-  font-size: 60px;
-  margin-bottom: 16px;
-  animation: logo-pulse 2s infinite;
-}
-
-@keyframes logo-pulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.1); }
+  margin-bottom: 32px;
 }
 
 .login-header h1 {
-  font-size: 28px;
-  font-weight: 700;
-  background: linear-gradient(90deg, #00d4ff, #00ff88);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  font-size: 24px;
+  font-weight: 600;
+  color: #303133;
   margin-bottom: 8px;
+  transition: color 0.3s;
 }
 
 .login-header p {
-  color: rgba(255,255,255,0.5);
   font-size: 14px;
+  color: #909399;
+  transition: color 0.3s;
 }
 
-/* 输入框 */
-.input-wrapper {
-  position: relative;
-  display: flex;
-  align-items: center;
+.login-form {
+  margin-bottom: 24px;
 }
 
-.input-icon {
-  position: absolute;
-  left: 16px;
-  color: rgba(255,255,255,0.4);
-  font-size: 18px;
-  z-index: 1;
-}
-
-.cyber-input {
-  width: 100%;
-  height: 50px;
-  padding: 0 16px 0 48px;
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.1);
-  border-radius: 10px;
-  color: #fff;
-  font-size: 15px;
-  outline: none;
-  transition: all 0.3s;
-}
-
-.cyber-input::placeholder {
-  color: rgba(255,255,255,0.3);
-}
-
-.cyber-input:focus {
-  border-color: #00d4ff;
-  box-shadow: 0 0 20px rgba(0,212,255,0.2);
-}
-
-/* 登录按钮 */
 .login-btn {
   width: 100%;
-  height: 50px;
-  background: linear-gradient(90deg, #00d4ff, #00ff88);
-  border: none;
-  border-radius: 10px;
-  color: #0a0a0f;
-  font-size: 16px;
-  font-weight: 700;
-  cursor: pointer;
-  position: relative;
-  overflow: hidden;
-  transition: all 0.3s;
+  font-weight: 500;
 }
 
-.login-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 30px rgba(0,212,255,0.4);
-}
-
-.login-btn span {
-  position: relative;
-  z-index: 1;
-}
-
-.btn-glow {
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: linear-gradient(
-    45deg,
-    transparent 30%,
-    rgba(255,255,255,0.3) 50%,
-    transparent 70%
-  );
-  animation: shine 3s infinite;
-}
-
-@keyframes shine {
-  0% { transform: translateX(-100%) rotate(45deg); }
-  100% { transform: translateX(100%) rotate(45deg); }
-}
-
-.login-footer {
+.theme-toggle {
   text-align: center;
-  margin-top: 30px;
-  color: rgba(255,255,255,0.3);
-  font-size: 12px;
+  padding-top: 16px;
+  border-top: 1px solid #eee;
+  transition: border-color 0.3s;
+}
+
+/* 暗色主题 */
+.dark-mode.login-page {
+  background: #141414;
+}
+
+.dark-mode .login-card {
+  background: #1f1f1f;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+}
+
+.dark-mode .login-header h1 {
+  color: #e5e5e5;
+}
+
+.dark-mode .login-header p {
+  color: #666;
+}
+
+.dark-mode .theme-toggle {
+  border-top-color: #333;
 }
 </style>

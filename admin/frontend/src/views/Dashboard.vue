@@ -2,76 +2,78 @@
   <div class="dashboard">
     <el-row :gutter="20">
       <el-col :span="6">
-        <div class="stat-card card-1">
-          <div class="stat-icon">👑</div>
+        <div class="stat-card">
+          <div class="stat-icon" style="background: linear-gradient(135deg, #667eea, #764ba2);">
+            <el-icon><User /></el-icon>
+          </div>
           <div class="stat-info">
             <div class="stat-label">总主播数</div>
             <div class="stat-value">{{ anchorCount }}</div>
           </div>
-          <div class="stat-trend up">+12%</div>
         </div>
       </el-col>
       <el-col :span="6">
-        <div class="stat-card card-2">
-          <div class="stat-icon">⚔️</div>
+        <div class="stat-card">
+          <div class="stat-icon" style="background: linear-gradient(135deg, #f093fb, #f5576c);">
+            <el-icon><Coin /></el-icon>
+          </div>
           <div class="stat-info">
             <div class="stat-label">今日对战数</div>
             <div class="stat-value">{{ todayBattleCount }}</div>
           </div>
-          <div class="stat-trend up">+8%</div>
         </div>
       </el-col>
       <el-col :span="6">
-        <div class="stat-card card-3">
-          <div class="stat-icon">💎</div>
+        <div class="stat-card">
+          <div class="stat-icon" style="background: linear-gradient(135deg, #4facfe, #00f2fe);">
+            <el-icon><Money /></el-icon>
+          </div>
           <div class="stat-info">
             <div class="stat-label">今日礼物收入</div>
-            <div class="stat-value">¥{{ todayGiftIncome }}</div>
+            <div class="stat-value">¥{{ todayGiftIncome.toLocaleString() }}</div>
           </div>
-          <div class="stat-trend up">+25%</div>
         </div>
       </el-col>
       <el-col :span="6">
-        <div class="stat-card card-4">
-          <div class="stat-icon">👥</div>
+        <div class="stat-card">
+          <div class="stat-icon" style="background: linear-gradient(135deg, #43e97b, #38f9d7);">
+            <el-icon><UserFilled /></el-icon>
+          </div>
           <div class="stat-info">
             <div class="stat-label">在线人数</div>
             <div class="stat-value">{{ onlineCount }}</div>
           </div>
-          <div class="stat-trend">在线</div>
         </div>
       </el-col>
     </el-row>
     
     <el-row :gutter="20" style="margin-top: 20px;">
       <el-col :span="24">
-        <div class="quick-entry-card">
-          <div class="card-title">
-            <span>🚀</span> 快捷入口
-          </div>
+        <div class="quick-card">
+          <div class="card-title">快捷入口</div>
           <div class="quick-entry">
             <router-link to="/anchor" class="quick-btn">
-              <div class="quick-icon">👤</div>
+              <el-icon><User /></el-icon>
               <span>主播管理</span>
             </router-link>
             <router-link to="/gift-simulator" class="quick-btn">
-              <div class="quick-icon">🎁</div>
+              <el-icon><Present /></el-icon>
               <span>礼物模拟</span>
             </router-link>
             <router-link to="/gm-command" class="quick-btn">
-              <div class="quick-icon">⚡</div>
+              <el-icon><Promotion /></el-icon>
               <span>GM命令</span>
             </router-link>
             <router-link to="/fans" class="quick-btn">
-              <div class="quick-icon">❤️</div>
+              <el-icon><UserFilled /></el-icon>
               <span>粉丝管理</span>
             </router-link>
             <router-link to="/announcement" class="quick-btn">
-              <div class="quick-icon">📢</div>
+              <el-icon><Bell /></el-icon>
               <span>公告管理</span>
             </router-link>
             <router-link to="/settings" class="quick-btn">
-              <div class="quick-icon">⚙️</div>
+              <el-icon><Setting /></el-icon>
               <span>系统设置</span>
             </router-link>
           </div>
@@ -83,6 +85,7 @@
 
 <script setup>
 import { ref } from 'vue'
+import { User, Coin, Money, UserFilled, Present, Promotion, Bell, Setting } from '@element-plus/icons-vue'
 
 const anchorCount = ref(128)
 const todayBattleCount = ref(856)
@@ -95,45 +98,40 @@ const onlineCount = ref(2341)
   height: 100%;
   padding: 20px;
   box-sizing: border-box;
+  background: #f5f7fa;
+  transition: background 0.3s;
 }
 
 /* 统计卡片 */
 .stat-card {
-  height: 120px;
-  border-radius: 16px;
+  height: 100px;
+  border-radius: 8px;
   padding: 20px;
   display: flex;
   align-items: center;
-  position: relative;
-  overflow: hidden;
-  transition: transform 0.3s, box-shadow 0.3s;
-  cursor: pointer;
+  background: #fff;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+  transition: all 0.2s, background 0.3s;
 }
 
 .stat-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-}
-
-.card-1 {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-}
-
-.card-2 {
-  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-}
-
-.card-3 {
-  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-}
-
-.card-4 {
-  background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
 }
 
 .stat-icon {
-  font-size: 40px;
+  width: 56px;
+  height: 56px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin-right: 16px;
+}
+
+.stat-icon .el-icon {
+  font-size: 24px;
+  color: #fff;
 }
 
 .stat-info {
@@ -142,46 +140,33 @@ const onlineCount = ref(2341)
 
 .stat-label {
   font-size: 14px;
-  color: rgba(255,255,255,0.8);
+  color: #909399;
   margin-bottom: 8px;
+  transition: color 0.3s;
 }
 
 .stat-value {
-  font-size: 32px;
-  font-weight: 700;
-  color: #fff;
-}
-
-.stat-trend {
-  position: absolute;
-  top: 16px;
-  right: 16px;
-  padding: 4px 10px;
-  border-radius: 12px;
-  font-size: 12px;
+  font-size: 24px;
   font-weight: 600;
-  background: rgba(255,255,255,0.2);
-  color: #fff;
-}
-
-.stat-trend.up {
-  background: rgba(0,255,128,0.3);
+  color: #303133;
+  transition: color 0.3s;
 }
 
 /* 快捷入口 */
-.quick-entry-card {
-  background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(255,255,255,0.1);
-  border-radius: 16px;
+.quick-card {
+  background: #fff;
+  border-radius: 8px;
   padding: 24px;
-  backdrop-filter: blur(10px);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+  transition: background 0.3s, box-shadow 0.3s;
 }
 
 .card-title {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 600;
-  color: #fff;
+  color: #303133;
   margin-bottom: 20px;
+  transition: color 0.3s;
 }
 
 .quick-entry {
@@ -195,30 +180,62 @@ const onlineCount = ref(2341)
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 140px;
-  height: 100px;
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.1);
-  border-radius: 12px;
+  width: 120px;
+  height: 90px;
+  background: #f5f7fa;
+  border-radius: 8px;
   text-decoration: none;
-  color: rgba(255,255,255,0.8);
-  transition: all 0.3s;
+  color: #606266;
+  transition: all 0.2s;
 }
 
 .quick-btn:hover {
-  background: linear-gradient(135deg, rgba(0,212,255,0.2) 0%, rgba(0,255,136,0.2) 100%);
-  border-color: #00d4ff;
-  transform: translateY(-3px);
-  box-shadow: 0 10px 30px rgba(0,212,255,0.2);
+  background: #409eff;
+  color: #fff;
 }
 
-.quick-icon {
-  font-size: 32px;
+.quick-btn .el-icon {
+  font-size: 24px;
   margin-bottom: 8px;
 }
 
 .quick-btn span {
   font-size: 14px;
-  font-weight: 500;
+}
+
+/* ===== 暗色主题 ===== */
+:global(html.dark) .dashboard {
+  background: #141414;
+}
+
+:global(html.dark) .stat-card {
+  background: #1f1f1f;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.2);
+}
+
+:global(html.dark) .stat-label {
+  color: #666;
+}
+
+:global(html.dark) .stat-value {
+  color: #e5e5e5;
+}
+
+:global(html.dark) .quick-card {
+  background: #1f1f1f;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.2);
+}
+
+:global(html.dark) .card-title {
+  color: #e5e5e5;
+}
+
+:global(html.dark) .quick-btn {
+  background: #2a2a2a;
+  color: #999;
+}
+
+:global(html.dark) .quick-btn:hover {
+  background: #409eff;
 }
 </style>

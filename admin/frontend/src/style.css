@@ -1,3 +1,4 @@
+/* 全局样式 */
 * {
   margin: 0;
   padding: 0;
@@ -19,4 +20,71 @@ body {
 #app {
   width: 100%;
   height: 100%;
+}
+
+/* Element Plus 暗色主题覆盖 */
+html.dark {
+  --el-bg-color: #1f1f1f;
+  --el-bg-color-overlay: #2a2a2a;
+  --el-text-color-primary: #e5e5e5;
+  --el-text-color-regular: #bfbfbf;
+  --el-border-color: #333;
+  --el-border-color-light: #444;
+  --el-fill-color-light: #2a2a2a;
+}
+
+html.dark .el-input__wrapper,
+html.dark .el-select__wrapper,
+html.dark .el-textarea__inner {
+  background-color: #2a2a2a !important;
+  box-shadow: 0 0 0 1px #444 inset !important;
+}
+
+html.dark .el-input__inner,
+html.dark .el-select__input,
+html.dark .el-textarea__inner {
+  color: #e5e5e5 !important;
+}
+
+html.dark .el-table {
+  --el-table-bg-color: transparent;
+  --el-table-tr-bg-color: transparent;
+  --el-table-header-bg-color: #252525;
+  --el-table-row-hover-bg-color: #2a2a2a;
+  --el-table-border-color: #333;
+  --el-table-text-color: #bfbfbf;
+}
+
+html.dark .el-card {
+  --el-card-bg-color: #1f1f1f;
+  --el-card-border-color: #333;
+}
+
+html.dark .el-dialog {
+  --el-dialog-bg-color: #1f1f1f;
+  --el-dialog-border-radius: 8px;
+}
+
+html.dark .el-menu {
+  --el-menu-bg-color: transparent;
+  --el-menu-text-color: #999;
+  --el-menu-hover-bg-color: #2a2a2a;
+  --el-menu-active-color: #409eff;
+}
+
+html.dark .el-pagination {
+  --el-pagination-bg-color: transparent;
+  --el-pagination-button-bg-color: #2a2a2a;
+  --el-pagination-hover-color: #409eff;
+}
+
+html.dark .el-tag {
+  --el-tag-bg-color: #2a2a2a;
+  --el-tag-border-color: transparent;
+  --el-tag-text-color: #bfbfbf;
+}
+
+html.dark .el-dropdown-menu {
+  --el-dropdown-menuItem-hover-fill: #2a2a2a;
+  --el-dropdown-menuItem-hover-color: #409eff;
 }

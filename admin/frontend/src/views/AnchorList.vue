@@ -4,7 +4,7 @@
       <template #header>
         <div class="card-header">
           <span>主播管理</span>
-          <el-button type="primary" size="small" class="cyber-btn" @click="openAddDialog">
+          <el-button type="primary" size="small" @click="openAddDialog">
             <el-icon><Plus /></el-icon>
             新增主播
           </el-button>
@@ -16,26 +16,22 @@
         <el-input 
           v-model="filter.keyword" 
           placeholder="搜索主播姓名/昵称/直播间ID" 
-          style="width: 280px;" 
+          style="width: 260px;" 
           clearable 
-          class="cyber-input"
           @keyup.enter="getList" 
         >
           <template #prefix><el-icon><Search /></el-icon></template>
         </el-input>
-        <el-select v-model="filter.platform" placeholder="平台" style="width: 120px; margin-left: 12px;" clearable @change="getList" class="cyber-select">
+        <el-select v-model="filter.platform" placeholder="平台" style="width: 100px; margin-left: 12px;" clearable @change="getList">
           <el-option label="抖音" :value="1" />
           <el-option label="快手" :value="2" />
           <el-option label="TikTok" :value="3" />
         </el-select>
-        <el-select v-model="filter.status" placeholder="状态" style="width: 100px; margin-left: 12px;" clearable @change="getList" class="cyber-select">
+        <el-select v-model="filter.status" placeholder="状态" style="width: 80px; margin-left: 12px;" clearable @change="getList">
           <el-option label="正常" :value="1" />
           <el-option label="封禁" :value="2" />
         </el-select>
-        <el-button type="primary" size="small" class="cyber-btn" style="margin-left: 12px;" @click="getList">
-          <el-icon><Search /></el-icon>
-          搜索
-        </el-button>
+        <el-button type="primary" size="small" style="margin-left: 12px;" @click="getList">搜索</el-button>
       </div>
 
       <!-- 操作栏 -->
@@ -44,21 +40,19 @@
           v-if="selectedIds.length > 0" 
           type="danger" 
           size="small" 
-          class="danger-btn"
           @click="batchUpdateStatus(2)"
         >批量封禁</el-button>
         <el-button 
           v-if="selectedIds.length > 0" 
           type="success" 
           size="small" 
-          class="success-btn"
           style="margin-left: 8px;"
           @click="batchUpdateStatus(1)"
         >批量解封</el-button>
-        <span v-if="selectedIds.length === 0" style="color: rgba(255,255,255,0.4); font-size: 14px;">
+        <span v-if="selectedIds.length === 0" style="color: #909399; font-size: 14px;">
           已选择 0 条记录
         </span>
-        <span v-else style="color: #00d4ff; font-size: 14px; margin-left: 12px;">
+        <span v-else style="color: #409eff; font-size: 14px; margin-left: 12px;">
           已选择 {{ selectedIds.length }} 条记录
         </span>
       </div>
@@ -69,7 +63,6 @@
         border 
         style="width: 100%;" 
         height="420"
-        class="cyber-table"
         @selection-change="handleSelectionChange"
       >
         <el-table-column type="selection" width="55" />
@@ -77,7 +70,7 @@
         <el-table-column prop="nickname" label="主播昵称" width="120" />
         <el-table-column prop="platform" label="平台" width="80">
           <template #default="{ row }">
-            <el-tag :type="getPlatformType(row.platform)" effect="dark" size="small">
+            <el-tag :type="getPlatformType(row.platform)" size="small">
               {{ getPlatformName(row.platform) }}
             </el-tag>
           </template>
@@ -86,7 +79,7 @@
         <el-table-column prop="platform_uid" label="平台UID" width="150" />
         <el-table-column prop="status" label="状态" width="80">
           <template #default="{ row }">
-            <el-tag :type="row.status === 1 ? 'success' : 'danger'" effect="dark" size="small">
+            <el-tag :type="row.status === 1 ? 'success' : 'danger'" size="small">
               {{ row.status === 1 ? '正常' : '封禁' }}
             </el-tag>
           </template>
@@ -109,15 +102,14 @@
           :page-sizes="[10, 20, 50, 100]"
           layout="total, sizes, prev, pager, next, jumper"
           :total="total"
-          background
-          @Size-change="getList"
-          @Current-change="getList"
+          @size-change="getList"
+          @current-change="getList"
         />
       </div>
     </el-card>
 
     <!-- 弹窗 -->
-    <el-dialog v-model="dialogVisible" :title="dialogType === 'add' ? '新增主播' : '编辑主播'" width="600px" class="cyber-dialog">
+    <el-dialog v-model="dialogVisible" :title="dialogType === 'add' ? '新增主播' : '编辑主播'" width="600px">
       <el-form :model="form" label-width="100px">
         <el-form-item label="主播姓名" prop="name" required>
           <el-input v-model="form.name" placeholder="请输入主播姓名" />
@@ -293,15 +285,18 @@ onMounted(() => {
   height: 100%;
   padding: 16px;
   box-sizing: border-box;
+  background: #f5f7fa;
+  transition: background 0.3s;
 }
 
+/* 亮色主题 */
 .box-card {
   height: 100%;
   display: flex;
   flex-direction: column;
-  background: rgba(255,255,255,0.03) !important;
-  border: 1px solid rgba(255,255,255,0.1) !important;
-  backdrop-filter: blur(10px);
+  background: #fff;
+  border-radius: 8px;
+  transition: background 0.3s, border-color 0.3s;
 }
 
 .box-card :deep(.el-card__body) {
@@ -312,8 +307,8 @@ onMounted(() => {
 }
 
 .box-card :deep(.el-card__header) {
-  background: rgba(0,0,0,0.2);
-  border-bottom: 1px solid rgba(255,255,255,0.1);
+  border-bottom: 1px solid #eee;
+  transition: border-color 0.3s;
 }
 
 .card-header {
@@ -321,36 +316,6 @@ onMounted(() => {
   justify-content: space-between;
   align-items: center;
   height: 40px;
-  color: #fff;
-}
-
-.card-header span {
-  font-size: 16px;
-  font-weight: 600;
-}
-
-/* 赛博按钮 */
-.cyber-btn {
-  background: linear-gradient(90deg, #00d4ff, #00ff88) !important;
-  border: none !important;
-  color: #0a0a0f !important;
-  font-weight: 600;
-}
-
-.cyber-btn:hover {
-  box-shadow: 0 0 20px rgba(0,212,255,0.5);
-}
-
-.danger-btn {
-  background: linear-gradient(90deg, #ff4757, #ff6b81) !important;
-  border: none !important;
-  color: #fff !important;
-}
-
-.success-btn {
-  background: linear-gradient(90deg, #00d4ff, #00ff88) !important;
-  border: none !important;
-  color: #0a0a0f !important;
 }
 
 /* 搜索栏 */
@@ -361,68 +326,16 @@ onMounted(() => {
   flex-shrink: 0;
 }
 
-.cyber-input :deep(.el-input__wrapper) {
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.1);
-  box-shadow: none;
-}
-
-.cyber-input :deep(.el-input__wrapper:hover),
-.cyber-input :deep(.el-input__wrapper.is-focus) {
-  border-color: #00d4ff;
-}
-
-.cyber-input :deep(.el-input__inner) {
-  color: #fff;
-}
-
-.cyber-input :deep(.el-input__inner::placeholder) {
-  color: rgba(255,255,255,0.4);
-}
-
-.cyber-select :deep(.el-input__wrapper) {
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.1);
-  box-shadow: none;
-}
-
 /* 操作栏 */
 .batch-bar {
   display: flex;
   align-items: center;
   height: 40px;
   flex-shrink: 0;
-  border-top: 1px solid rgba(255,255,255,0.1);
-  border-bottom: 1px solid rgba(255,255,255,0.1);
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
   padding: 0 12px;
-}
-
-/* 表格 */
-.cyber-table {
-  background: transparent !important;
-}
-
-.cyber-table :deep(.el-table__header-wrapper th) {
-  background: rgba(0,0,0,0.3) !important;
-  color: #fff !important;
-  border-bottom: 1px solid rgba(255,255,255,0.1) !important;
-}
-
-.cyber-table :deep(.el-table__body-wrapper) {
-  background: transparent !important;
-}
-
-.cyber-table :deep(.el-table__row) {
-  background: transparent !important;
-  color: rgba(255,255,255,0.8) !important;
-}
-
-.cyber-table :deep(.el-table__row--hover) {
-  background: rgba(0,212,255,0.1) !important;
-}
-
-.cyber-table :deep(.el-table__row td) {
-  border-bottom: 1px solid rgba(255,255,255,0.05) !important;
+  transition: border-color 0.3s;
 }
 
 /* 分页 */
@@ -432,14 +345,32 @@ onMounted(() => {
   align-items: center;
   justify-content: flex-end;
   flex-shrink: 0;
-  border-top: 1px solid rgba(255,255,255,0.1);
+  border-top: 1px solid #eee;
   padding-top: 8px;
+  transition: border-color 0.3s;
 }
 
-.pagination :deep(.el-pagination) {
-  --el-pagination-bg-color: rgba(255,255,255,0.05);
-  --el-pagination-text-color: rgba(255,255,255,0.8);
-  --el-pagination-button-color: rgba(255,255,255,0.8);
-  --el-pagination-hover-color: #00d4ff;
+/* ===== 暗色主题 ===== */
+/* 通过 :global 或者直接在父容器有 dark class 时生效 */
+:global(html.dark) .anchor-list {
+  background: #141414;
+}
+
+:global(html.dark) .box-card {
+  background: #1f1f1f;
+  border-color: #333;
+}
+
+:global(html.dark) .box-card :deep(.el-card__header) {
+  border-bottom-color: #333;
+}
+
+:global(html.dark) .batch-bar {
+  border-top-color: #333;
+  border-bottom-color: #333;
+}
+
+:global(html.dark) .pagination {
+  border-top-color: #333;
 }
 </style>
