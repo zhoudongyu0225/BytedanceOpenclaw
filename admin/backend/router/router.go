@@ -58,6 +58,7 @@ func InitRouter() *gin.Engine {
 	r.StaticFS("/docs", http.Dir("./static/docs"))
 	// 静态资源服务
 	r.Static("/assets", "./static/assets")
+	r.StaticFile("/vite.svg", "./static/vite.svg")
 	// 前端页面路由
 	r.NoRoute(func(c *gin.Context) {
 		c.File("./static/index.html")

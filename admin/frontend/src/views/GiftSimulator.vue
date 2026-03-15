@@ -8,8 +8,8 @@
       </template>
 
       <el-row :gutter="20">
-        <el-col :span="8">
-          <el-form label-width="100px">
+        <el-col :xs="24" :sm="24" :md="8" :lg="8">
+          <el-form label-width="100px" label-position="top" class="gift-form">
             <el-form-item label="平台" required>
               <el-select v-model="form.platform" placeholder="请选择平台" style="width: 100%;">
                 <el-option label="抖音" :value="1" />
@@ -42,7 +42,7 @@
             </el-form-item>
           </el-form>
         </el-col>
-        <el-col :span="16">
+        <el-col :xs="24" :sm="24" :md="16" :lg="16" style="margin-top: 20px;">
           <div class="log-box">
             <div class="log-header">
               <span>发送日志</span>
@@ -155,5 +155,14 @@ onMounted(() => {
 .log-time {
   color: #909399;
   margin-right: 10px;
+}
+/* 响应式适配 */
+@media (max-width: 768px) {
+  .gift-form {
+    margin-bottom: 20px;
+  }
+  .log-box {
+    height: 400px;
+  }
 }
 </style>
