@@ -1,14 +1,13 @@
 # 学习目录索引
 
-## 最新更新 (2026-03-18)
+## 最新更新 (2026-03-19)
 
 ### 今日新增
-- `auto-learning-2026-03-18.md` - 行业趋势与自动学习笔记
-- `danmaku-tech-guide.md` - 弹幕技术实战指南（含代码示例）
-- `resources.md` - 学习资源清单
+- `auto-learning-2026-03-19.md` - 知识体系梳理与学习笔记
 
 ### 核心文档
 - `tech-summary.md` - 技术总结
+- `danmaku-tech-guide.md` - 弹幕技术实战指南（含代码示例）
 - `INDEX.md` - 本索引文件
 
 ---
