@@ -24,3 +24,6 @@
 
 ### 资源存储
 SVN目录统一存放所有工程、代码、文档、素材
+
+### 关联仓库
+- OpenClaw 相关仓库：https://github.com/zhoudongyu0225/BytedanceOpenclaw
