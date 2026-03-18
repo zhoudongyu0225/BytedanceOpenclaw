@@ -4,6 +4,7 @@
 
 ### 今日新增
 - `auto-learning-2026-03-19.md` - 知识体系梳理与学习笔记
+- `auto-learning-2026-03-19-deep-tech.md` - 深度技术实战篇
 
 ### 核心文档
 - `tech-summary.md` - 技术总结
