@@ -3,8 +3,10 @@
 ## 最新更新 (2026-03-19)
 
 ### 今日新增
-- `auto-learning-2026-03-19.md` - 知识体系梳理与学习笔记
+- `2026-03-19-09-30-弹幕小游戏开发深度技术笔记.md` - 实时音视频、WebAI增强、高性能渲染、平台对接、架构实践
+- `2026-03-19-learning-notes.md` - HTML5游戏框架、微信小程序、弹幕技术要点
 - `auto-learning-2026-03-19-deep-tech.md` - 深度技术实战篇
+- `auto-learning-2026-03-19.md` - 知识体系梳理与学习笔记
 
 ### 核心文档
 - `tech-summary.md` - 技术总结
@@ -23,7 +25,8 @@
 ### 技术栈
 - Cocos Creator
 - WebSocket弹幕系统
-- Canvas渲染优化
+- Canvas/WebGL渲染优化
+- WebRTC实时通信
 - 跨平台优化
 
 ### 变现模式
