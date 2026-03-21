@@ -3,6 +3,9 @@
 ## 最新更新 (2026-03-21)
 
 ### 今日新增
+- `2026-03-21-21-29-弹幕小游戏核心协议与三平台API架构实证分析.md` - 代码级实证分析：MessageList protobuf完整字段映射、WebSocket命令常量(init_define.go)、三平台Webhook对比（抖音签名vs快手IP白名单）、ChatMessage/GiftMessage/LikeMessage三个TODO定稿实现方案（代码级）、游戏动作广播机制（TipsNotify vs GameFrameNotify两种路径）、autoConfig.go配置映射验证、VeADK语义审核集成路径
+
+### 今日新增
 - `2026-03-21-18-29-弹幕小游戏control_barrage.go TODO实现深度研究与代码实证.md` - 代码实证研究：ChatMessage/GiftMessage/LikeMessage 三个TODO完整实现方案。弹幕规则引擎（关键词→动作映射→冷却→积分→广播）、礼物配置驱动（GiftId→士兵/治疗/伤害→积分→广播）、点赞阈值Buff触发系统（10/20/50/100阈值→不同Buff等级）。识别关键缺失：GameFrame广播协议（protobuf新消息类型）
 
 ### 今日新增
