@@ -3,6 +3,7 @@
 ## 最新更新 (2026-03-22)
 
 ### 今日新增
+- `2026-03-22-06-29-弹幕小游戏Go并发架构与压测实践.md` - Go并发模式深度实践：Worker Pool（jobChan解耦）、Redis Pipeline批量写入（延迟降低97%）、分片sync.Map冷却检查（读性能3倍）、WebSocket Channel异步发送、Lua脚本原子操作、HyperLogLog UV统计、Redis Stream事件流、4阶段分层压测方案（单连接基准→线性扩容→峰值冲击→长稳）、优化后预估承载30-50万用户/1-2万QPS
 - `2026-03-22-03-29-弹幕小游戏P0TODO深度实证与VeADK-Go集成路径.md` - 代码级P0TODO完整实现：danmakuRuleEngine.go弹幕规则引擎框架、ChatMessage完整代码（敏感词+规则匹配+冷却+积分+广播）、GiftMessage完整代码（computeSoldierNum+computeRescueNum+礼物逻辑+GAME_GIFT广播）、LikeMessage完整代码（Buff阈值检查+点赞里程碑+GAME_BUFF广播）、VeADK-Go AI语义审核Agent架构设计、混合审核方案（DFA+AI）
 
 ### 今日新增
