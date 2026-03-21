@@ -1,34 +1,48 @@
 #!/bin/bash
 # Skill 自动更新脚本 - 每天执行一次
 DATE=$(date +%Y-%m-%d)
-LOG="=== Skill Update $DATE ==="
 SKILLS_DIR="$HOME/.openclaw/workspace/skills"
+LOG="$HOME/.openclaw/skills-update.log"
 
-echo "$LOG" >> $HOME/.openclaw/skills-update.log
+echo "=== Skill Update $DATE ===" >> $LOG
 cd $SKILLS_DIR
 
-# 已安装的需要更新的skill列表
-REPOS=(
-  "pskoett/self-improving-agent:self-improving-agent"
-  "nesdeq/openclaw-feeds:openclaw-feeds"
-  "jimliuxinghai/find-skills:find-skills"
-  "spclaudehome/skill-vetter:skill-vetter"
-  "savorgbot-exe/focus-mode:focus-mode"
-  "thesethrose/agent-browser:agent-browser"
-  "jeffjhunter/ai-daily-briefing:ai-daily-briefing"
-  "globalcaos/youtube-ultimate:youtube-ultimate"
-  "thesethrose/reddit-search:reddit-search"
+BASE_URL="https://raw.githubusercontent.com/openclaw/skills/main/skills"
+
+# 需要更新的 skills 列表
+SKILLS=(
+  "jimliuxinghai/find-skills"
+  "spclaudehome/skill-vetter"
+  "savorgbot-exe/focus-mode"
+  "thesethrose/agent-browser"
+  "jeffjhunter/ai-daily-briefing"
+  "globalcaos/youtube-ultimate"
+  "thesethrose/reddit-search"
+  "pskoett/self-improving-agent"
+  "nesdeq/openclaw-feeds"
 )
 
-for repo in "${REPOS[@]}"; do
-  path=$(echo $repo | cut -d: -f2)
-  if [ -d "$path" ]; then
-    echo "--- Updating $path ---" >> $HOME/.openclaw/skills-update.log
-    cd $path && git pull --force 2>&1 | tail -3 >> $HOME/.openclaw/skills-update.log && cd $SKILLS_DIR
+for item in "${SKILLS[@]}"; do
+  name=$(echo $item | cut -d/ -f2)
+  
+  if [ -d "$name" ] && [ -f "$name/SKILL.md" ]; then
+    # 已有skill，只更新SKILL.md（raw文件下载）
+    echo "Updating $name..." >> $LOG
+    curl -s --max-time 10 "$BASE_URL/$item/SKILL.md" -o "$name/SKILL.md" 2>&1 | head -1 >> $LOG
+    echo "  $name SKILL.md updated" >> $LOG
+  elif [ -d "$name" ]; then
+    # 目录存在但没有SKILL.md，尝试下载
+    echo "Fetching $name SKILL.md..." >> $LOG
+    curl -s --max-time 10 "$BASE_URL/$item/SKILL.md" -o "$name/SKILL.md" 2>&1 | head -1 >> $LOG
   else
-    echo "--- Cloning $path ---" >> $HOME/.openclaw/skills-update.log
-    git clone --depth=1 "https://github.com/$(echo $repo | cut -d: -f1).git" $path 2>&1 | tail -3 >> $HOME/.openclaw/skills-update.log
+    # 不存在，创建并下载
+    mkdir -p "$name"
+    echo "Cloning $name..." >> $LOG
+    for f in "SKILL.md" "README.md"; do
+      curl -s --max-time 10 "$BASE_URL/$item/$f" -o "$name/$f" 2>&1 | head -1 >> $LOG
+    done
+    echo "  $name installed" >> $LOG
   fi
 done
 
-echo "=== Update Done $DATE ===" >> $HOME/.openclaw/skills-update.log
+echo "=== Update Done $DATE ===" >> $LOG

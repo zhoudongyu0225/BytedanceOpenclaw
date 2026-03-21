@@ -1,5 +1,10 @@
 # 学习目录索引
 
+## 最新更新 (2026-03-22)
+
+### 今日新增
+- `2026-03-22-00-29-弹幕小游戏P0TODO定稿实现路径.md` - 代码级实证：protobuf完整体系验证(serverMsg.proto MessageList/Message、Z4_TipsNotify TipType枚举)、三TODO完整实现代码(ChatMessage弹幕逻辑/GiftMessage礼物逻辑/LikeMessage点赞逻辑)、computeSoldierNum工具函数设计、TipMsg前缀协议( GAME_ACTION|GAME_GIFT|GAME_BUFF)、TipsNotify Type扩展方案(新增GameAction=5)、Redis ZSet排行榜Key设计(GameRank.{RankType}.{GameId}.{PlatformId}.{TimeStamp})、DanmakuRule.json规则引擎配置格式
+
 ## 最新更新 (2026-03-21)
 
 ### 今日新增
