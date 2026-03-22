@@ -3,6 +3,9 @@
 ## 最新更新 (2026-03-22)
 
 ### 今日新增
+- `2026-03-22-18-29-弹幕小游戏晚间学习笔记.md` - 晚间代码实证：三个TODO精确定位（行号+代码上下文）、WebSocket架构深度验证（WsSend通道机制+convergeMessage合并处理）、protobuf体系完整验证（Message 15字段+TitsNotify+前缀协议）、三平台API架构对比（抖音/快手/野游路由+认证差异）、Redis数据流完整验证（排行榜Key设计+点赞累计Key+冷却Key）、配置系统验证（Gift.json 8礼物+Buff.json 6Buff）、实施优先级与置信度评估、P0代码框架完整展示、知识体系完成度雷达图
+
+### 今日新增
 - `2026-03-22-15-29-弹幕小游戏P0TODO深度实证与protobuf体系完整分析.md` - 代码级P0TODO完整实现方案精校：Message protobuf完整字段验证（Count=点赞数,GiftName/GiftCount=礼物名称数量,Total=礼物总价值）、ChatMessage弹幕逻辑完整代码（敏感词过滤+5秒冷却+积分更新+TipsNotify广播+GAME_ACTION前缀）、GiftMessage礼物逻辑完整代码（GetGiftConfig查询+士兵数计算+GAME_GIFT广播+GiftName平台下发）、LikeMessage点赞逻辑完整代码（msg.GetCount()获取点赞数+累计点赞+Buff阈值检查+GAME_BUFF广播）、protobuf TipType扩展方案（GameAction=5 vs 复用RoomRoll）、DanmakuRule.json规则引擎设计
 
 ### 今日新增
