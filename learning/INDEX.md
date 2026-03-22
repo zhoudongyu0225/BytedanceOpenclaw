@@ -3,6 +3,9 @@
 ## 最新更新 (2026-03-22)
 
 ### 今日新增
+- `2026-03-22-15-29-弹幕小游戏P0TODO深度实证与protobuf体系完整分析.md` - 代码级P0TODO完整实现方案精校：Message protobuf完整字段验证（Count=点赞数,GiftName/GiftCount=礼物名称数量,Total=礼物总价值）、ChatMessage弹幕逻辑完整代码（敏感词过滤+5秒冷却+积分更新+TipsNotify广播+GAME_ACTION前缀）、GiftMessage礼物逻辑完整代码（GetGiftConfig查询+士兵数计算+GAME_GIFT广播+GiftName平台下发）、LikeMessage点赞逻辑完整代码（msg.GetCount()获取点赞数+累计点赞+Buff阈值检查+GAME_BUFF广播）、protobuf TipType扩展方案（GameAction=5 vs 复用RoomRoll）、DanmakuRule.json规则引擎设计
+
+### 今日新增
 - `2026-03-22-12-29-弹幕小游戏部署运维体系与生产环境稳定性保障.md` - Docker多阶段构建Dockerfile（alpine+non-root+健康检查+优雅停止）、生产级docker-compose.yml（dmGameServer+Server+Redis+MongoDB+Kafka+Prometheus+Grafana）、Prometheus监控指标体系（barrage_messages_total/processing_duration/active_connections/Goroutine计数）、Grafana告警规则（ServiceDown/P99延迟/Goroutine泄漏/刷屏攻击检测）、zerolog结构化日志增强（Lumberjack轮转+JSON格式+TraceID）、高可用架构（Kafka多播→消费者组→水平扩展）、K8s滚动更新策略（maxSurge=1/maxUnavailable=0/preStop）、生产环境配置矩阵、故障排查指南
 - `2026-03-22-09-29-VeADK-Go弹幕审核Agent完整实现与config.yaml配置详解.md` - VeADK-Go框架深度研究（Go 1.24.4+、Google ADK兼容、config.yaml自动配置）、完整AI审核Agent代码实现（config.go/dfa.go/prompt.go/agent.go/hybrid.go）、弹幕审核Prompt设计（系统Prompt+用户Prompt+JSON解析）、混合审核架构（DFA毫秒预检+AI语义审核+LRU缓存）、control_barrage.go三TODO对应审核策略、开发/生产config.yaml最佳配置
 - `2026-03-22-06-29-弹幕小游戏Go并发架构与压测实践.md` - Go并发模式深度实践：Worker Pool（jobChan解耦）、Redis Pipeline批量写入（延迟降低97%）、分片sync.Map冷却检查（读性能3倍）、WebSocket Channel异步发送、Lua脚本原子操作、HyperLogLog UV统计、Redis Stream事件流、4阶段分层压测方案（单连接基准→线性扩容→峰值冲击→长稳）、优化后预估承载30-50万用户/1-2万QPS
