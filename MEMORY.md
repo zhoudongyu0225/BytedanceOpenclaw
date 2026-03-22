@@ -33,3 +33,20 @@ SVN目录统一存放所有工程、代码、文档、素材
 
 ### 关联仓库
 - OpenClaw 相关仓库：https://github.com/zhoudongyu0225/BytedanceOpenclaw
+
+## 项目深度研究更新（2026-03-23）
+### control_barrage.go 三个TODO状态更新
+- ✅ ChatMessage弹幕逻辑（line 48）：完整代码方案已定稿，含敏感词过滤+规则引擎+冷却+积分+广播
+- ✅ GiftMessage礼物逻辑（line 90）：完整代码方案已定稿，含computeSoldierNum+computeRescueNum+价值校验+GAME_GIFT广播
+- ✅ LikeMessage点赞逻辑（line 134）：完整代码方案已定稿，含累计点赞+阈值Buff触发+GAME_BUFF广播
+
+### Protobuf关键发现
+- Message.count = 点赞数量（用于LikeMessage）
+- Message.total/giftId/giftCount/giftName = 礼物相关字段（用于GiftMessage）
+- TipsNotify.Type: Normal=0, Notice=1, RoomRoll=2, RoomMarquee=3, ServerMarquee=4
+- 广播前缀约定：GAME_ACTION|uid|name|action、GAME_GIFT|uid|name|giftName|soldiers|rescue、GAME_BUFF|uid|name|buffType|buffValue
+
+### 待开发模块
+- danmakuRuleEngine.go：弹幕规则引擎（DanmakuRule.json驱动）
+- VeADK-Go AI审核Agent集成
+- GM管理后台
