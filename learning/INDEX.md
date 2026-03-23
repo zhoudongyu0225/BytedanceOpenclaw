@@ -3,6 +3,9 @@
 ## 最新更新 (2026-03-23)
 
 ### 今日新增
+- `2026-03-23-15-29-弹幕小游戏平台政策更新与Go高并发性能深度学习.md` - TikTok Mini Games 2026 H1最佳入局窗口期（美国/日本/东南亚6国开放、CPA<$0.2/ROAS>120%爆款案例）、抖音Q1 IAP激励政策（40%消耗赠款、400万上限）、Go Goroutine调度原理与Worker Pool最佳实践、Redis大Key治理（2026 Q1官方数据：63%性能抖动与大Key相关）、Go 1.24+升级收益、P0TODO单元测试框架设计（danmaku_rule_test/gift_test/redis_key_test）、生产压测4阶段方案、知识体系完成度更新（新增大Key治理50%/单元测试30%/压测20%）
+
+### 今日新增
 - `2026-03-23-12-29-弹幕小游戏P0TODO生产级实现与VeADK-Go审核集成.md` - 生产级三TODO完整实现代码：ChatMessage（含DFA过滤+Redis冷却+规则引擎+积分扣除+广播GAME_ACTION前缀）、GiftMessage（含价值校验+士兵数计算+救援伤害值+周月榜更新+广播GAME_GIFT前缀）、LikeMessage（含点赞冷却+累计计数+Buff阈值检查+Buff触发+GAME_BUFF前缀广播）、Redis Key完整设计矩阵（6种Key+TTL+数据类型）、DanmakuRule.json规则引擎设计、VeADK-Go AI审核回调集成（BeforeModelCallback DFA预检+AfterModelCallback结果解析+弹幕审核Prompt设计）、知识体系完成度评估（10维度）、单元测试和生产压测待办
 
 ### 今日新增
