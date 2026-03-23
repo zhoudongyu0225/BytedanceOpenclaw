@@ -3,6 +3,9 @@
 ## 最新更新 (2026-03-23)
 
 ### 今日新增
+- `2026-03-23-21-29-弹幕小游戏核心TODO深度实证与P0代码框架定稿.md` - **代码级实证核心发现**：go.mod使用go 1.21.4(待升级)、control_barrage.go三TODO精确定位（ChatMessage第17-39行/GiftMessage第42-74行/LikeMessage第80-104行）、TipsNotify proto仅支持TipType 0-4(缺GameAction=5)、Gift.json/Buff.json配置存在但未被代码加载、敏感词filter已初始化但ChatMessage未使用。完整实现代码：ChatMessage(含DFA过滤5秒冷却/积分扣除/RoomRoll广播)、GiftMessage(含computeSoldierNum/computeRescueNum/价值校验/积分增加)、LikeMessage(含LikeAccum累计/Buff阈值触发/持续时间管理)、DanmakuRule.json配置格式与matchDanmakuRule并发安全实现、单元测试框架(3个test文件)、Redis Key矩阵(已有GameRank+新增4种业务Key)、实施路线图(5阶段：proto扩展→配置系统→P0实现→测试→VeADK集成)
+
+### 今日新增
 - `2026-03-23-15-29-弹幕小游戏平台政策更新与Go高并发性能深度学习.md` - TikTok Mini Games 2026 H1最佳入局窗口期（美国/日本/东南亚6国开放、CPA<$0.2/ROAS>120%爆款案例）、抖音Q1 IAP激励政策（40%消耗赠款、400万上限）、Go Goroutine调度原理与Worker Pool最佳实践、Redis大Key治理（2026 Q1官方数据：63%性能抖动与大Key相关）、Go 1.24+升级收益、P0TODO单元测试框架设计（danmaku_rule_test/gift_test/redis_key_test）、生产压测4阶段方案、知识体系完成度更新（新增大Key治理50%/单元测试30%/压测20%）
 
 ### 今日新增
