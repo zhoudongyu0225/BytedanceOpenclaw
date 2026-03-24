@@ -3,6 +3,9 @@
 ## 最新更新 (2026-03-24)
 
 ### 今日新增
+- `2026-03-24-18-29-弹幕小游戏代码实证与单元测试体系构建.md` - **代码级实证核心产出**：control_barrage.go三TODO精确定位(ChatMessage第39行/ GiftMessage第77行/LikeMessage第114行)；已验证基础设施清单(敏感词过滤✅/排行榜查询✅/WebSocket双协程✅/点赞合并✅)；敏感词过滤器现状分析(importcjj/sensitive+DFA算法+单例模式,需确认./mgc.txt存在)；单元测试体系完整构建(control_barrage_test.go含4个核心测试/sensitive_test.go/sensitive_test.go/zmgr_logic_test.go消息合并验证)；go.mod依赖版本矩阵(go 1.21.4, 10个核心依赖)；go 1.24升级三阶段路线图(SwissTable↑读性能/SpinMutex减少切换/泛型类型别名)；P0TODO最终实现方案(ChatMessage含敏感词过滤5秒冷却广播/GiftMessage含积分累加周月榜更新/ LikeMessage含IncrBy原子累计60秒过期getBuffLevel阈值触发)；下一阶段5项学习重点
+
+### 今日新增
 - `2026-03-24-15-29-弹幕小游戏深度技术实证与代码完善路径.md` - **代码级实证核心产出**：control_barrage.go三TODO精确定位(ChatMessage~47行/GiftMessage~86行/LikeMessage~116行)；zmgr_logic.go双协程读写分离架构深度分析(WebSocket+Gzip+心跳)；Protobuf消息体系完整验证(MessageList/Message全部字段)；Redis Key矩阵6种Key用途+TTL；ChatMessage完整5步处理流水线；GiftMessage礼物逻辑(含士兵数/治疗值计算)；LikeMessage点赞合并+Buff阈值触发；go 1.21.4→1.24升级路径+SwissTable收益；Redis v8→v9升级建议(15-20%性能提升)；生产就绪度5维度评估；4阶段完善路线图(12项TODO)
 
 ### 今日新增
