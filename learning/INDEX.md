@@ -3,6 +3,9 @@
 ## 最新更新 (2026-03-24)
 
 ### 今日新增
+- `2026-03-24-15-29-弹幕小游戏深度技术实证与代码完善路径.md` - **代码级实证核心产出**：control_barrage.go三TODO精确定位(ChatMessage~47行/GiftMessage~86行/LikeMessage~116行)；zmgr_logic.go双协程读写分离架构深度分析(WebSocket+Gzip+心跳)；Protobuf消息体系完整验证(MessageList/Message全部字段)；Redis Key矩阵6种Key用途+TTL；ChatMessage完整5步处理流水线；GiftMessage礼物逻辑(含士兵数/治疗值计算)；LikeMessage点赞合并+Buff阈值触发；go 1.21.4→1.24升级路径+SwissTable收益；Redis v8→v9升级建议(15-20%性能提升)；生产就绪度5维度评估；4阶段完善路线图(12项TODO)
+
+### 今日新增
 - `2026-03-24-12-29-弹幕小游戏午间学习笔记.md` - **《2026抖音小游戏行业白皮书》核心数据**：DAU同比增长120%/市场份额接近30%/小火人日活突破1亿/81.6%流量来自社交分享；TikTok 3月公会新政（新手保护期取消/最高39%综合返佣）；Go 1.24 SwissTable+自旋锁特性；Go 1.25/1.26 Green Tea GC演进路线（硬件加速）；智享AI直播三代GPT-6+DeepSeek双模型架构；VeADK政府采购落地（266万元）；对项目具体影响与待办更新
 
 ### 今日新增
