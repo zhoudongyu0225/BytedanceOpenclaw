@@ -3,6 +3,7 @@
 ## 最新更新 (2026-03-24)
 
 ### 今日新增
+- `2026-03-24-21-29-弹幕小游戏Admin后端架构与安全深度分析.md` - **Admin后端架构核心发现**：游戏服务器(dmGameServer, Go 1.21.4)与管理后台(admin/backend, Go 1.22)双服务架构全景；Admin中间件体系仅有auth.go(JWT+RBAC)，缺失Rate Limiting/CORS/RequestID等关键安全中间件；MongoDB数据模型完整分析(Anchor模型含平台/房间/状态, User模型含角色权限)；Protobuf Message 15字段完整分析(Type/Name/Uid/HeadImg/Content/Count/Total/GiftId/GiftCount/GiftName/RepeatEnd/MsgId/AnchorId/GroupId/RepeatEndhh)；Message字段全部为string的数值转换安全风险；Admin后端安全加固完整方案(Rate Limiting/CORS/RequestID/Recovery中间件代码)；game server输入验证缺失(Content长度/UID格式/数值溢出)；Go 1.22安全特性收益；优先级修复清单(P0-P2共8项)
 - `2026-03-24-18-29-弹幕小游戏代码实证与单元测试体系构建.md` - **代码级实证核心产出**：control_barrage.go三TODO精确定位(ChatMessage第39行/ GiftMessage第77行/LikeMessage第114行)；已验证基础设施清单(敏感词过滤✅/排行榜查询✅/WebSocket双协程✅/点赞合并✅)；敏感词过滤器现状分析(importcjj/sensitive+DFA算法+单例模式,需确认./mgc.txt存在)；单元测试体系完整构建(control_barrage_test.go含4个核心测试/sensitive_test.go/sensitive_test.go/zmgr_logic_test.go消息合并验证)；go.mod依赖版本矩阵(go 1.21.4, 10个核心依赖)；go 1.24升级三阶段路线图(SwissTable↑读性能/SpinMutex减少切换/泛型类型别名)；P0TODO最终实现方案(ChatMessage含敏感词过滤5秒冷却广播/GiftMessage含积分累加周月榜更新/ LikeMessage含IncrBy原子累计60秒过期getBuffLevel阈值触发)；下一阶段5项学习重点
 
 ### 今日新增
