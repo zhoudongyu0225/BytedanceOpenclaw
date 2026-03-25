@@ -3,7 +3,8 @@
 ## 最新更新 (2026-03-25)
 
 ### 今日新增
-- `2026-03-25-12-29-弹幕小游戏安全加固与依赖升级深度研究.md` - **安全加固与依赖升级深度研究**：三大高风险依赖漏洞分析（dgrijalva/jwt-go严重漏洞CVEA-2020-26171需立即迁移、go-redis/v8可升级v9获得15-20%性能提升、Go 1.21.4→1.24升级SwissTable收益18-22%）；Admin后端安全中间件缺失完整分析（Rate Limiting/CORS/RequestID中间件完整实现代码）；生产环境运维隐患（分布式锁缺失导致多实例cron重复执行、敏感词过滤已实现但ChatMessage未启用）；安全依赖完整评级表（游戏服务器7项/Admin后端6项）；P0-P2优先级修复矩阵
+- `2026-03-25-18-29-弹幕小游戏代码级全景实证与配置系统深度分析（晚间更新）.md` - **晚间代码级全景实证**：zmgr_logic.go双协程WebSocket架构完整分析（Read协程内3-ticker+消息合并+BarrageMessageChan机制）；LikeMessage/GiftMessage/ChatMessage三种不同处理模型对比（Like=1秒ticker批量+合并，Gift/Chat=立即处理）；GiftMessage无冷却机制安全缺陷；Redis ZSet Key无TTL无限增长问题；敏感词过滤器nil panic严重Bug（GetSensitiveFilter返回nil导致ContainsSensitiveWord panic）；JWT库CVE-2020-26171漏洞确认；StirngToInt32拼写错误（重复定义）；Gift.json/Buff.json实际字段名与文档不符纠正（GetSoldierNum而非soldierNum，BuffDurationType而非duration）；WebSocket二进制协议格式（4+2+1+1+body，含Gzip压缩）；zbarrage_mgr.go野游token管理架构；go.mod依赖完整审计含升级优先级；生产环境就绪度65%评估
+- `2026-03-25-15-29-弹幕小游戏代码级全景实证与配置系统深度分析.md` - **安全加固与依赖升级深度研究**：三大高风险依赖漏洞分析（dgrijalva/jwt-go严重漏洞CVEA-2020-26171需立即迁移、go-redis/v8可升级v9获得15-20%性能提升、Go 1.21.4→1.24升级SwissTable收益18-22%）；Admin后端安全中间件缺失完整分析（Rate Limiting/CORS/RequestID中间件完整实现代码）；生产环境运维隐患（分布式锁缺失导致多实例cron重复执行、敏感词过滤已实现但ChatMessage未启用）；安全依赖完整评级表（游戏服务器7项/Admin后端6项）；P0-P2优先级修复矩阵
 
 ## 最新更新 (2026-03-24)
 
