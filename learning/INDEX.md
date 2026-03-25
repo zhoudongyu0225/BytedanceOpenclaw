@@ -3,6 +3,9 @@
 ## 最新更新 (2026-03-25)
 
 ### 今日新增
+- `2026-03-25-21-50-弹幕小游戏双服务架构依赖对比与今日核心发现总结.md` - **今日核心发现最终汇总**：双服务架构完整对比（dmGameServer Go1.21.4⚠️ vs admin Go1.22✅）；go.mod依赖矩阵（JWT/Redis/MongoDB/Gin/日志库差异）；JWT迁移路径确认（golang-jwt/jwt/v5 Admin已验证）；今日P0-P2问题清单更新（15项问题追踪）；知识体系完成度~93%；项目就绪度~60%；立即/本周/下周行动计划
+- `2026-03-25-21-45-弹幕小游戏Redis Key体系与工具函数深度实证.md` - **Redis Key体系完整审计**：10种Key完整分析（DayAnchorInfo/DayPlayerInfo/AnchorActivePlayer/AnchorPlayer等）；ZSet排行榜三时间维度设计（当天/当月/永久）；1000名上限保护机制；MongoDB流水统计模型（OverviewOfTransactions/AnchordOfTransactions）；野游平台AES-256-GCM加密通信+硬编码密钥风险；MsgId去重YyMsgIdCheck实现+10000条全量重建问题；礼物价值计算公式(num×one)；StirngToInt32拼写错误Bug（control_barrage.go vs utils.go）；敏感词过滤器nil panic根因分析；完整WebSocket命令常量表；数据流全景图（6阶段）
+- `2026-03-25-21-29-弹幕小游戏晚间综合知识巩固与未解决问题追踪.md` - **晚间综合知识整理**：WebSocket双协程+三ticker+BarrageMessageChan完整架构巩固；LikeMessage vs GiftMessage vs ChatMessage处理模型对比（重要发现：GiftMessage无冷却机制）；JWT CVE-2020-26171漏洞迁移方案；敏感词过滤器nil panic根因；Gift.json实际字段名纠正；Go版本升级路径与收益量化；知识体系完成度~91%综合评估；P0/P1/P2未解决问题追踪矩阵（15项）；项目当前状态快照（就绪度~60%）；下一阶段学习计划
 - `2026-03-25-18-29-弹幕小游戏代码级全景实证与配置系统深度分析（晚间更新）.md` - **晚间代码级全景实证**：zmgr_logic.go双协程WebSocket架构完整分析（Read协程内3-ticker+消息合并+BarrageMessageChan机制）；LikeMessage/GiftMessage/ChatMessage三种不同处理模型对比（Like=1秒ticker批量+合并，Gift/Chat=立即处理）；GiftMessage无冷却机制安全缺陷；Redis ZSet Key无TTL无限增长问题；敏感词过滤器nil panic严重Bug（GetSensitiveFilter返回nil导致ContainsSensitiveWord panic）；JWT库CVE-2020-26171漏洞确认；StirngToInt32拼写错误（重复定义）；Gift.json/Buff.json实际字段名与文档不符纠正（GetSoldierNum而非soldierNum，BuffDurationType而非duration）；WebSocket二进制协议格式（4+2+1+1+body，含Gzip压缩）；zbarrage_mgr.go野游token管理架构；go.mod依赖完整审计含升级优先级；生产环境就绪度65%评估
 - `2026-03-25-15-29-弹幕小游戏代码级全景实证与配置系统深度分析.md` - **安全加固与依赖升级深度研究**：三大高风险依赖漏洞分析（dgrijalva/jwt-go严重漏洞CVEA-2020-26171需立即迁移、go-redis/v8可升级v9获得15-20%性能提升、Go 1.21.4→1.24升级SwissTable收益18-22%）；Admin后端安全中间件缺失完整分析（Rate Limiting/CORS/RequestID中间件完整实现代码）；生产环境运维隐患（分布式锁缺失导致多实例cron重复执行、敏感词过滤已实现但ChatMessage未启用）；安全依赖完整评级表（游戏服务器7项/Admin后端6项）；P0-P2优先级修复矩阵
 
